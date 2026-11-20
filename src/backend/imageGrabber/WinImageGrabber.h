@@ -34,6 +34,9 @@ class WinImageGrabber : public AbstractRectAreaImageGrabber
 public:
     explicit WinImageGrabber(const QSharedPointer<IConfig> &config);
     ~WinImageGrabber() override;
+    QRect activeWindowRect() const override;
+    QRect fullScreenRect() const override;
+    CursorDto getCursorWithPosition() const override;
 
 protected slots:
 	void grab() override;
