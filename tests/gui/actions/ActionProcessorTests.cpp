@@ -174,14 +174,12 @@ void ActionProcessorTests::CaptureFinished_Should_SendSignalsForAllSelectedActio
 	action.setIsSaveEnabled(true);
 	action.setIsCopyToClipboardEnabled(true);
 	action.setIsOpenDirectoryEnabled(true);
-	action.setIsUploadEnabled(true);
 	action.setIsPinImageEnabled(true);
 	ActionProcessor processor;
 	processor.setPostProcessingEnabled(false);
 	QSignalSpy saveSignalSpy(&processor, &ActionProcessor::triggerSave);
 	QSignalSpy copySignalSpy(&processor, &ActionProcessor::triggerCopyToClipboard);
 	QSignalSpy openSignalSpy(&processor, &ActionProcessor::triggerOpenDirectory);
-	QSignalSpy uploadSignalSpy(&processor, &ActionProcessor::triggerUpload);
 	QSignalSpy pinSignalSpy(&processor, &ActionProcessor::triggerPinImage);
 	processor.process(action);
 
@@ -192,7 +190,6 @@ void ActionProcessorTests::CaptureFinished_Should_SendSignalsForAllSelectedActio
     QCOMPARE(saveSignalSpy.count(), 1);
     QCOMPARE(copySignalSpy.count(), 1);
     QCOMPARE(openSignalSpy.count(), 1);
-    QCOMPARE(uploadSignalSpy.count(), 1);
     QCOMPARE(pinSignalSpy.count(), 1);
 }
 
@@ -204,14 +201,12 @@ void ActionProcessorTests::CaptureFinished_Should_NotSendSignalsForNotSelectedAc
 	action.setIsSaveEnabled(false);
 	action.setIsCopyToClipboardEnabled(false);
 	action.setIsOpenDirectoryEnabled(false);
-	action.setIsUploadEnabled(false);
 	action.setIsPinImageEnabled(false);
 	ActionProcessor processor;
 	processor.setPostProcessingEnabled(false);
 	QSignalSpy saveSignalSpy(&processor, &ActionProcessor::triggerSave);
 	QSignalSpy copySignalSpy(&processor, &ActionProcessor::triggerCopyToClipboard);
 	QSignalSpy openSignalSpy(&processor, &ActionProcessor::triggerOpenDirectory);
-	QSignalSpy uploadSignalSpy(&processor, &ActionProcessor::triggerUpload);
 	QSignalSpy pinSignalSpy(&processor, &ActionProcessor::triggerPinImage);
 	processor.process(action);
 
@@ -222,7 +217,6 @@ void ActionProcessorTests::CaptureFinished_Should_NotSendSignalsForNotSelectedAc
     QCOMPARE(saveSignalSpy.count(), 0);
     QCOMPARE(copySignalSpy.count(), 0);
     QCOMPARE(openSignalSpy.count(), 0);
-    QCOMPARE(uploadSignalSpy.count(), 0);
     QCOMPARE(pinSignalSpy.count(), 0);
 }
 

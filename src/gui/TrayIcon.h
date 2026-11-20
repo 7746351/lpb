@@ -42,7 +42,6 @@ public:
 	void setSaveAction(QAction *action);
 	void setPasteAction(QAction *action);
 	void setCopyAction(QAction *action);
-	void setUploadAction(QAction *action);
 	void setQuitAction(QAction *action);
 	void setActionsMenu(QMenu *actionsMenu);
 	void setEnabled(bool enabled);
@@ -61,7 +60,6 @@ private:
 	QAction *mSaveAction;
 	QAction *mPasteAction;
 	QAction *mCopyAction;
-	QAction *mUploadAction;
 	QAction *mShowEditorAction;
 	QAction *mQuitAction;
 	QMenu *mActionsMenu;

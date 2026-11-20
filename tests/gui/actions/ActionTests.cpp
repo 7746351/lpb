@@ -35,7 +35,6 @@ void ActionTests::EqualsOperator_Should_ReturnTrue_When_AllValuesMatch()
 	action1.setCaptureMode(CaptureModes::FullScreen);
 	action1.setIsSaveEnabled(true);
 	action1.setIsCopyToClipboardEnabled(true);
-	action1.setIsUploadEnabled(true);
 	action1.setIsOpenDirectoryEnabled(true);
 	action1.setIsPinImageEnabled(true);
 	action1.setIsHideMainWindowEnabled(true);
@@ -50,7 +49,6 @@ void ActionTests::EqualsOperator_Should_ReturnTrue_When_AllValuesMatch()
 	action2.setCaptureMode(action1.captureMode());
 	action2.setIsSaveEnabled(action1.isSaveEnabled());
 	action2.setIsCopyToClipboardEnabled(action1.isCopyToClipboardEnabled());
-	action2.setIsUploadEnabled(action1.isUploadEnabled());
 	action2.setIsOpenDirectoryEnabled(action1.isOpenDirectoryEnabled());
 	action2.setIsPinImageEnabled(action1.isPinImageEnabled());
 	action2.setIsHideMainWindowEnabled(action1.isHideMainWindowEnabled());
@@ -75,7 +73,6 @@ void ActionTests::EqualsOperator_Should_ReturnFalse_When_NameIsDifferent()
 	action1.setCaptureMode(CaptureModes::FullScreen);
 	action1.setIsSaveEnabled(true);
 	action1.setIsCopyToClipboardEnabled(true);
-	action1.setIsUploadEnabled(true);
 	action1.setIsOpenDirectoryEnabled(true);
 	action1.setIsPinImageEnabled(true);
 	action1.setIsHideMainWindowEnabled(true);
@@ -90,7 +87,6 @@ void ActionTests::EqualsOperator_Should_ReturnFalse_When_NameIsDifferent()
 	action2.setCaptureMode(action1.captureMode());
 	action2.setIsSaveEnabled(action1.isSaveEnabled());
 	action2.setIsCopyToClipboardEnabled(action1.isCopyToClipboardEnabled());
-	action2.setIsUploadEnabled(action1.isUploadEnabled());
 	action2.setIsOpenDirectoryEnabled(action1.isOpenDirectoryEnabled());
 	action2.setIsPinImageEnabled(action1.isPinImageEnabled());
 	action2.setIsHideMainWindowEnabled(action1.isHideMainWindowEnabled());
@@ -115,7 +111,6 @@ void ActionTests::EqualsOperator_Should_ReturnFalse_When_ShortcutDifferent()
 	action1.setCaptureMode(CaptureModes::FullScreen);
 	action1.setIsSaveEnabled(true);
 	action1.setIsCopyToClipboardEnabled(true);
-	action1.setIsUploadEnabled(true);
 	action1.setIsOpenDirectoryEnabled(true);
 	action1.setIsPinImageEnabled(true);
 	action1.setIsHideMainWindowEnabled(true);
@@ -130,7 +125,6 @@ void ActionTests::EqualsOperator_Should_ReturnFalse_When_ShortcutDifferent()
 	action2.setCaptureMode(action1.captureMode());
 	action2.setIsSaveEnabled(action1.isSaveEnabled());
 	action2.setIsCopyToClipboardEnabled(action1.isCopyToClipboardEnabled());
-	action2.setIsUploadEnabled(action1.isUploadEnabled());
 	action2.setIsOpenDirectoryEnabled(action1.isOpenDirectoryEnabled());
 	action2.setIsPinImageEnabled(action1.isPinImageEnabled());
 	action2.setIsHideMainWindowEnabled(action1.isHideMainWindowEnabled());
@@ -155,7 +149,6 @@ void ActionTests::EqualsOperator_Should_ReturnFalse_When_IsCaptureEnabledDiffere
 	action1.setCaptureMode(CaptureModes::FullScreen);
 	action1.setIsSaveEnabled(true);
 	action1.setIsCopyToClipboardEnabled(true);
-	action1.setIsUploadEnabled(true);
 	action1.setIsOpenDirectoryEnabled(true);
 	action1.setIsPinImageEnabled(true);
 	action1.setIsHideMainWindowEnabled(true);
@@ -170,7 +163,6 @@ void ActionTests::EqualsOperator_Should_ReturnFalse_When_IsCaptureEnabledDiffere
 	action2.setCaptureMode(action1.captureMode());
 	action2.setIsSaveEnabled(action1.isSaveEnabled());
 	action2.setIsCopyToClipboardEnabled(action1.isCopyToClipboardEnabled());
-	action2.setIsUploadEnabled(action1.isUploadEnabled());
 	action2.setIsOpenDirectoryEnabled(action1.isOpenDirectoryEnabled());
 	action2.setIsPinImageEnabled(action1.isPinImageEnabled());
 	action2.setIsHideMainWindowEnabled(action1.isHideMainWindowEnabled());
@@ -195,7 +187,6 @@ void ActionTests::EqualsOperator_Should_ReturnFalse_When_IncludeCursorDifferent(
 	action1.setCaptureMode(CaptureModes::FullScreen);
 	action1.setIsSaveEnabled(true);
 	action1.setIsCopyToClipboardEnabled(true);
-	action1.setIsUploadEnabled(true);
 	action1.setIsOpenDirectoryEnabled(true);
 	action1.setIsPinImageEnabled(true);
 	action1.setIsHideMainWindowEnabled(true);
@@ -210,7 +201,6 @@ void ActionTests::EqualsOperator_Should_ReturnFalse_When_IncludeCursorDifferent(
 	action2.setCaptureMode(action1.captureMode());
 	action2.setIsSaveEnabled(action1.isSaveEnabled());
 	action2.setIsCopyToClipboardEnabled(action1.isCopyToClipboardEnabled());
-	action2.setIsUploadEnabled(action1.isUploadEnabled());
 	action2.setIsOpenDirectoryEnabled(action1.isOpenDirectoryEnabled());
 	action2.setIsPinImageEnabled(action1.isPinImageEnabled());
 	action2.setIsHideMainWindowEnabled(action1.isHideMainWindowEnabled());
@@ -235,7 +225,6 @@ void ActionTests::EqualsOperator_Should_ReturnFalse_When_CaptureDelayDifferent()
 	action1.setCaptureMode(CaptureModes::FullScreen);
 	action1.setIsSaveEnabled(true);
 	action1.setIsCopyToClipboardEnabled(true);
-	action1.setIsUploadEnabled(true);
 	action1.setIsOpenDirectoryEnabled(true);
 	action1.setIsPinImageEnabled(true);
 	action1.setIsHideMainWindowEnabled(true);
@@ -250,7 +239,6 @@ void ActionTests::EqualsOperator_Should_ReturnFalse_When_CaptureDelayDifferent()
 	action2.setCaptureMode(action1.captureMode());
 	action2.setIsSaveEnabled(action1.isSaveEnabled());
 	action2.setIsCopyToClipboardEnabled(action1.isCopyToClipboardEnabled());
-	action2.setIsUploadEnabled(action1.isUploadEnabled());
 	action2.setIsOpenDirectoryEnabled(action1.isOpenDirectoryEnabled());
 	action2.setIsPinImageEnabled(action1.isPinImageEnabled());
 	action2.setIsHideMainWindowEnabled(action1.isHideMainWindowEnabled());
@@ -275,7 +263,6 @@ void ActionTests::EqualsOperator_Should_ReturnFalse_When_CaptureModeDifferent()
 	action1.setCaptureMode(CaptureModes::FullScreen);
 	action1.setIsSaveEnabled(true);
 	action1.setIsCopyToClipboardEnabled(true);
-	action1.setIsUploadEnabled(true);
 	action1.setIsOpenDirectoryEnabled(true);
 	action1.setIsPinImageEnabled(true);
 	action1.setIsHideMainWindowEnabled(true);
@@ -290,7 +277,6 @@ void ActionTests::EqualsOperator_Should_ReturnFalse_When_CaptureModeDifferent()
 	action2.setCaptureMode(CaptureModes::RectArea);
 	action2.setIsSaveEnabled(action1.isSaveEnabled());
 	action2.setIsCopyToClipboardEnabled(action1.isCopyToClipboardEnabled());
-	action2.setIsUploadEnabled(action1.isUploadEnabled());
 	action2.setIsOpenDirectoryEnabled(action1.isOpenDirectoryEnabled());
 	action2.setIsPinImageEnabled(action1.isPinImageEnabled());
 	action2.setIsHideMainWindowEnabled(action1.isHideMainWindowEnabled());
@@ -315,7 +301,6 @@ void ActionTests::EqualsOperator_Should_ReturnFalse_When_IsSaveEnabledDifferent(
 	action1.setCaptureMode(CaptureModes::FullScreen);
 	action1.setIsSaveEnabled(true);
 	action1.setIsCopyToClipboardEnabled(true);
-	action1.setIsUploadEnabled(true);
 	action1.setIsOpenDirectoryEnabled(true);
 	action1.setIsPinImageEnabled(true);
 	action1.setIsHideMainWindowEnabled(true);
@@ -330,7 +315,6 @@ void ActionTests::EqualsOperator_Should_ReturnFalse_When_IsSaveEnabledDifferent(
 	action2.setCaptureMode(action1.captureMode());
 	action2.setIsSaveEnabled(false);
 	action2.setIsCopyToClipboardEnabled(action1.isCopyToClipboardEnabled());
-	action2.setIsUploadEnabled(action1.isUploadEnabled());
 	action2.setIsOpenDirectoryEnabled(action1.isOpenDirectoryEnabled());
 	action2.setIsPinImageEnabled(action1.isPinImageEnabled());
 	action2.setIsHideMainWindowEnabled(action1.isHideMainWindowEnabled());
@@ -355,7 +339,6 @@ void ActionTests::EqualsOperator_Should_ReturnFalse_When_IsCopyToClipboardEnable
 	action1.setCaptureMode(CaptureModes::FullScreen);
 	action1.setIsSaveEnabled(true);
 	action1.setIsCopyToClipboardEnabled(true);
-	action1.setIsUploadEnabled(true);
 	action1.setIsOpenDirectoryEnabled(true);
 	action1.setIsPinImageEnabled(true);
 	action1.setIsHideMainWindowEnabled(true);
@@ -370,47 +353,6 @@ void ActionTests::EqualsOperator_Should_ReturnFalse_When_IsCopyToClipboardEnable
 	action2.setCaptureMode(action1.captureMode());
 	action2.setIsSaveEnabled(action1.isSaveEnabled());
 	action2.setIsCopyToClipboardEnabled(false);
-	action2.setIsUploadEnabled(action1.isUploadEnabled());
-	action2.setIsOpenDirectoryEnabled(action1.isOpenDirectoryEnabled());
-	action2.setIsPinImageEnabled(action1.isPinImageEnabled());
-	action2.setIsHideMainWindowEnabled(action1.isHideMainWindowEnabled());
-	action2.setIsGlobalShortcut(action1.isGlobalShortcut());
-
-	// act
-	auto result = action1 == action2;
-
-	// assert
-    QCOMPARE(result, false);
-}
-
-void ActionTests::EqualsOperator_Should_ReturnFalse_When_IsUploadEnabledDifferent()
-{
-	// arrange
-	Action action1;
-	action1.setName("Name");
-	action1.setShortcut(Qt::CTRL + Qt::Key_A);
-	action1.setIsCaptureEnabled(true);
-	action1.setIncludeCursor(true);
-	action1.setCaptureDelay(2000);
-	action1.setCaptureMode(CaptureModes::FullScreen);
-	action1.setIsSaveEnabled(true);
-	action1.setIsCopyToClipboardEnabled(true);
-	action1.setIsUploadEnabled(true);
-	action1.setIsOpenDirectoryEnabled(true);
-	action1.setIsPinImageEnabled(true);
-	action1.setIsHideMainWindowEnabled(true);
-	action1.setIsGlobalShortcut(true);
-
-	Action action2;
-	action2.setName(action1.name());
-	action2.setShortcut(action1.shortcut());
-	action2.setIsCaptureEnabled(action1.isCaptureEnabled());
-	action2.setIncludeCursor(action1.includeCursor());
-	action2.setCaptureDelay(action1.captureDelay());
-	action2.setCaptureMode(action1.captureMode());
-	action2.setIsSaveEnabled(action1.isSaveEnabled());
-	action2.setIsCopyToClipboardEnabled(action1.isCopyToClipboardEnabled());
-	action2.setIsUploadEnabled(false);
 	action2.setIsOpenDirectoryEnabled(action1.isOpenDirectoryEnabled());
 	action2.setIsPinImageEnabled(action1.isPinImageEnabled());
 	action2.setIsHideMainWindowEnabled(action1.isHideMainWindowEnabled());
@@ -435,7 +377,6 @@ void ActionTests::EqualsOperator_Should_ReturnFalse_When_IsOpenDirectoryEnabledD
 	action1.setCaptureMode(CaptureModes::FullScreen);
 	action1.setIsSaveEnabled(true);
 	action1.setIsCopyToClipboardEnabled(true);
-	action1.setIsUploadEnabled(true);
 	action1.setIsOpenDirectoryEnabled(true);
 	action1.setIsPinImageEnabled(true);
 	action1.setIsHideMainWindowEnabled(true);
@@ -450,7 +391,6 @@ void ActionTests::EqualsOperator_Should_ReturnFalse_When_IsOpenDirectoryEnabledD
 	action2.setCaptureMode(action1.captureMode());
 	action2.setIsSaveEnabled(action1.isSaveEnabled());
 	action2.setIsCopyToClipboardEnabled(action1.isCopyToClipboardEnabled());
-	action2.setIsUploadEnabled(action1.isUploadEnabled());
 	action2.setIsOpenDirectoryEnabled(false);
 	action2.setIsPinImageEnabled(action1.isPinImageEnabled());
 	action2.setIsHideMainWindowEnabled(action1.isHideMainWindowEnabled());
@@ -475,7 +415,6 @@ void ActionTests::EqualsOperator_Should_ReturnFalse_When_IsPinScreenshotEnabledD
 	action1.setCaptureMode(CaptureModes::FullScreen);
 	action1.setIsSaveEnabled(true);
 	action1.setIsCopyToClipboardEnabled(true);
-	action1.setIsUploadEnabled(true);
 	action1.setIsOpenDirectoryEnabled(true);
 	action1.setIsPinImageEnabled(true);
 	action1.setIsHideMainWindowEnabled(true);
@@ -490,7 +429,6 @@ void ActionTests::EqualsOperator_Should_ReturnFalse_When_IsPinScreenshotEnabledD
 	action2.setCaptureMode(action1.captureMode());
 	action2.setIsSaveEnabled(action1.isSaveEnabled());
 	action2.setIsCopyToClipboardEnabled(action1.isCopyToClipboardEnabled());
-	action2.setIsUploadEnabled(action1.isUploadEnabled());
 	action2.setIsOpenDirectoryEnabled(action1.isOpenDirectoryEnabled());
 	action2.setIsPinImageEnabled(false);
 	action2.setIsHideMainWindowEnabled(action1.isHideMainWindowEnabled());
@@ -515,7 +453,6 @@ void ActionTests::EqualsOperator_Should_ReturnFalse_When_IsHideMainWindowEnabled
 	action1.setCaptureMode(CaptureModes::FullScreen);
 	action1.setIsSaveEnabled(true);
 	action1.setIsCopyToClipboardEnabled(true);
-	action1.setIsUploadEnabled(true);
 	action1.setIsOpenDirectoryEnabled(true);
 	action1.setIsPinImageEnabled(true);
 	action1.setIsHideMainWindowEnabled(true);
@@ -530,7 +467,6 @@ void ActionTests::EqualsOperator_Should_ReturnFalse_When_IsHideMainWindowEnabled
 	action2.setCaptureMode(action1.captureMode());
 	action2.setIsSaveEnabled(action1.isSaveEnabled());
 	action2.setIsCopyToClipboardEnabled(action1.isCopyToClipboardEnabled());
-	action2.setIsUploadEnabled(action1.isUploadEnabled());
 	action2.setIsOpenDirectoryEnabled(action1.isOpenDirectoryEnabled());
 	action2.setIsPinImageEnabled(action1.isPinImageEnabled());
 	action2.setIsHideMainWindowEnabled(false);
@@ -555,7 +491,6 @@ void ActionTests::EqualsOperator_Should_ReturnFalse_When_IsGlobalShortcutDiffere
 	action1.setCaptureMode(CaptureModes::FullScreen);
 	action1.setIsSaveEnabled(true);
 	action1.setIsCopyToClipboardEnabled(true);
-	action1.setIsUploadEnabled(true);
 	action1.setIsOpenDirectoryEnabled(true);
 	action1.setIsPinImageEnabled(true);
 	action1.setIsHideMainWindowEnabled(true);
@@ -570,7 +505,6 @@ void ActionTests::EqualsOperator_Should_ReturnFalse_When_IsGlobalShortcutDiffere
 	action2.setCaptureMode(action1.captureMode());
 	action2.setIsSaveEnabled(action1.isSaveEnabled());
 	action2.setIsCopyToClipboardEnabled(action1.isCopyToClipboardEnabled());
-	action2.setIsUploadEnabled(action1.isUploadEnabled());
 	action2.setIsOpenDirectoryEnabled(action1.isOpenDirectoryEnabled());
 	action2.setIsPinImageEnabled(action1.isPinImageEnabled());
 	action2.setIsHideMainWindowEnabled(action1.isHideMainWindowEnabled());

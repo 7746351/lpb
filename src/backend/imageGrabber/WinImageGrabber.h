@@ -20,7 +20,10 @@
 #ifndef KSNIP_WINIMAGEGRABBER_H
 #define KSNIP_WINIMAGEGRABBER_H
 
+#include <QTimer>
+
 #include "AbstractRectAreaImageGrabber.h"
+#include "ScrollingImageStitcher.h"
 #include "WinWrapper.h"
 #include "src/gui/snippingArea/WinSnippingArea.h"
 #include "src/common/platform/HdpiScaler.h"
@@ -30,16 +33,30 @@ class WinImageGrabber : public AbstractRectAreaImageGrabber
     Q_OBJECT
 public:
     explicit WinImageGrabber(const QSharedPointer<IConfig> &config);
-    ~WinImageGrabber() override = default;
+    ~WinImageGrabber() override;
 
-protected:
-	QRect fullScreenRect() const override;
-	QRect activeWindowRect() const override;
-	CursorDto getCursorWithPosition() const override;
+protected slots:
+	void grab() override;
 
 private:
     WinWrapper *mWinWrapper;
     HdpiScaler mHdpiScaler;
+	QTimer *mScrollingTimer;
+	ScrollingImageStitcher mScrollingStitcher;
+	QPoint mOriginalCursorPosition;
+	QRect mScrollingScreenRect;
+	int mScrollingFrameCount;
+	int mScrollingDuplicateCount;
+	bool mScrollingActive;
+
+	void startScrollingCapture();
+	void cancelScrollingCapture();
+	void finishScrollingCapture();
+	void restoreCursor();
+	void captureScrollingFrame();
+
+private slots:
+	void scrollingTimeout();
 };
 
 #endif //KSNIP_WINIMAGEGRABBER_H

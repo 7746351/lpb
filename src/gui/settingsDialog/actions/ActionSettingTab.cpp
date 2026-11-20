@@ -74,8 +74,6 @@ void ActionSettingTab::initGui(const QList<CaptureModes> &captureModes)
 
 	mCopyToClipboardCheckBox->setText(tr("Copy image to Clipboard"));
 
-	mUploadCheckBox->setText(tr("Upload image"));
-
 	mOpenDirectoryCheckBox->setText(tr("Open image parent directory"));
 
 	mSaveCheckBox->setText(tr("Save image"));
@@ -100,10 +98,9 @@ void ActionSettingTab::initGui(const QList<CaptureModes> &captureModes)
 	mLayout->setRowMinimumHeight(7, 10);
 	mLayout->addWidget(mShowPinWindowCheckBox, 8, 0, 1, 5);
 	mLayout->addWidget(mCopyToClipboardCheckBox, 9, 0, 1, 5);
-	mLayout->addWidget(mUploadCheckBox, 10, 0, 1, 5);
-	mLayout->addWidget(mSaveCheckBox, 11, 0, 1, 5);
-	mLayout->addWidget(mOpenDirectoryCheckBox, 12, 0, 1, 5);
-	mLayout->addWidget(mHideMainWindowCheckBox, 13, 0, 1, 5);
+	mLayout->addWidget(mSaveCheckBox, 10, 0, 1, 5);
+	mLayout->addWidget(mOpenDirectoryCheckBox, 11, 0, 1, 5);
+	mLayout->addWidget(mHideMainWindowCheckBox, 12, 0, 1, 5);
 
 	setLayout(mLayout);
 }
@@ -140,7 +137,6 @@ Action ActionSettingTab::action() const
 	action.setIsSaveEnabled(mSaveCheckBox->isChecked());
 	action.setIsCopyToClipboardEnabled(mCopyToClipboardCheckBox->isChecked());
 	action.setIsOpenDirectoryEnabled(mOpenDirectoryCheckBox->isChecked());
-	action.setIsUploadEnabled(mUploadCheckBox->isChecked());
 	action.setIsHideMainWindowEnabled(mHideMainWindowCheckBox->isChecked());
 	return action;
 }
@@ -158,7 +154,6 @@ void ActionSettingTab::setAction(const Action &action) const
 	mSaveCheckBox->setChecked(action.isSaveEnabled());
 	mCopyToClipboardCheckBox->setChecked(action.isCopyToClipboardEnabled());
 	mOpenDirectoryCheckBox->setChecked(action.isOpenDirectoryEnabled());
-	mUploadCheckBox->setChecked(action.isUploadEnabled());
 	mHideMainWindowCheckBox->setChecked(action.isHideMainWindowEnabled());
 }
 
@@ -190,7 +185,6 @@ ActionSettingTab::ActionSettingTab(const QList<CaptureModes> &captureModes, cons
 	mIncludeCursorCheckBox(new QCheckBox(this)),
 	mShowPinWindowCheckBox(new QCheckBox(this)),
 	mCopyToClipboardCheckBox(new QCheckBox(this)),
-	mUploadCheckBox(new QCheckBox(this)),
 	mOpenDirectoryCheckBox(new QCheckBox(this)),
 	mHideMainWindowCheckBox(new QCheckBox(this)),
 	mSaveCheckBox(new QCheckBox(this)),

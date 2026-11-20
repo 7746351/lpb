@@ -32,7 +32,6 @@ public:
 
 	void log(const QString &message) const override;
 	void log(const QString &message, bool isSuccess) const override;
-	void log(const QString &message, QNetworkReply::NetworkError value) const override;
 
 private:
 	static QString boolToString(bool isSuccess);

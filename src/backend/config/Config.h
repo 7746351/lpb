@@ -30,7 +30,6 @@
 #include "IConfig.h"
 #include "ConfigOptions.h"
 #include "src/common/helper/PathHelper.h"
-#include "src/common/constants/DefaultValues.h"
 #include "src/common/provider/directoryPathProvider/IDirectoryPathProvider.h"
 #include "src/plugins/PluginInfo.h"
 #include "src/gui/actions/Action.h"
@@ -237,80 +236,6 @@ public:
 
 	int implicitCaptureDelay() const override;
 	void setImplicitCaptureDelay(int delay) override;
-
-	// Uploader
-
-	bool confirmBeforeUpload() const override;
-	void setConfirmBeforeUpload(bool enabled) override;
-
-	UploaderType uploaderType() const override;
-	void setUploaderType(UploaderType type) override;
-
-	// Imgur Uploader
-
-	QString imgurUsername() const override;
-	void setImgurUsername(const QString &username) override;
-
-	QByteArray imgurClientId() const override;
-	void setImgurClientId(const QString &clientId) override;
-
-	QByteArray imgurClientSecret() const override;
-	void setImgurClientSecret(const QString &clientSecret) override;
-
-	QByteArray imgurAccessToken() const override;
-	void setImgurAccessToken(const QString &accessToken) override;
-
-	QByteArray imgurRefreshToken() const override;
-	void setImgurRefreshToken(const QString &refreshToken) override;
-
-	bool imgurForceAnonymous() const override;
-	void setImgurForceAnonymous(bool enabled) override;
-
-	bool imgurLinkDirectlyToImage() const override;
-	void setImgurLinkDirectlyToImage(bool enabled) override;
-
-	bool imgurAlwaysCopyToClipboard() const override;
-	void setImgurAlwaysCopyToClipboard(bool enabled) override;
-
-	bool imgurOpenLinkInBrowser() const override;
-	void setImgurOpenLinkInBrowser(bool enabled) override;
-
-	QString imgurUploadTitle() const override;
-	void setImgurUploadTitle(const QString &uploadTitle) override;
-
-	QString imgurUploadDescription() const override;
-	void setImgurUploadDescription(const QString &uploadDescription) override;
-
-	QString imgurBaseUrl() const override;
-	void setImgurBaseUrl(const QString &baseUrl) override;
-
-	// Script Uploader
-
-	QString uploadScriptPath() const override;
-	void setUploadScriptPath(const QString &path) override;
-
-	bool uploadScriptCopyOutputToClipboard() const override;
-	void setUploadScriptCopyOutputToClipboard(bool enabled) override;
-
-	QString uploadScriptCopyOutputFilter() const override;
-	void setUploadScriptCopyOutputFilter(const QString &regex) override;
-
-	bool uploadScriptStopOnStdErr() const override;
-	void setUploadScriptStopOnStdErr(bool enabled) override;
-
-	// FTP Uploader
-
-	bool ftpUploadForceAnonymous() const override;
-	void setFtpUploadForceAnonymous(bool enabled) override;
-
-	QString ftpUploadUrl() const override;
-	void setFtpUploadUrl(const QString &path) override;
-
-	QString ftpUploadUsername() const override;
-	void setFtpUploadUsername(const QString &username) override;
-
-	QString ftpUploadPassword() const override;
-	void setFtpUploadPassword(const QString &password) override;
 
 	// HotKeys
 

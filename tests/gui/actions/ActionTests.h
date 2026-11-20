@@ -35,7 +35,6 @@ private slots:
     void EqualsOperator_Should_ReturnFalse_When_CaptureModeDifferent();
     void EqualsOperator_Should_ReturnFalse_When_IsSaveEnabledDifferent();
     void EqualsOperator_Should_ReturnFalse_When_IsCopyToClipboardEnabledDifferent();
-    void EqualsOperator_Should_ReturnFalse_When_IsUploadEnabledDifferent();
     void EqualsOperator_Should_ReturnFalse_When_IsOpenDirectoryEnabledDifferent();
     void EqualsOperator_Should_ReturnFalse_When_IsPinScreenshotEnabledDifferent();
     void EqualsOperator_Should_ReturnFalse_When_IsHideMainWindowEnabledDifferent();

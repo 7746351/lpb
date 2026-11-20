@@ -32,13 +32,6 @@ QString EnumTranslator::toTranslatedString(CaptureModes captureMode) const
 	return mCaptureModeMap[captureMode];
 }
 
-QString EnumTranslator::toString(UploadStatus uploadStatus) const
-{
-	Q_ASSERT(mUploadStatusMap.contains(uploadStatus));
-
-	return mUploadStatusMap[uploadStatus];
-}
-
 QString EnumTranslator::toString(PluginType pluginType) const
 {
 	Q_ASSERT(mPluginTypeMap.contains(pluginType));
@@ -49,24 +42,7 @@ QString EnumTranslator::toString(PluginType pluginType) const
 EnumTranslator::EnumTranslator()
 {
 	mapCaptureModeEnum();
-	mapUploadStatusEnum();
 	mapPluginTypeEnum();
-}
-
-void EnumTranslator::mapUploadStatusEnum()
-{
-	mUploadStatusMap[UploadStatus::NoError] = QLatin1String("No Error");
-	mUploadStatusMap[UploadStatus::ConnectionError] = QLatin1String("Connection Error");
-	mUploadStatusMap[UploadStatus::PermissionError] = QLatin1String("Permission Error");
-	mUploadStatusMap[UploadStatus::TimedOut] = QLatin1String("Timed Out");
-	mUploadStatusMap[UploadStatus::Crashed] = QLatin1String("Crashed");
-	mUploadStatusMap[UploadStatus::FailedToStart] = QLatin1String("Failed To Start");
-	mUploadStatusMap[UploadStatus::ReadError] = QLatin1String("Read Error");
-	mUploadStatusMap[UploadStatus::ScriptWroteToStdErr] = QLatin1String("Script Wrote To StdErr");
-	mUploadStatusMap[UploadStatus::UnableToSaveTemporaryImage] = QLatin1String("Unable To Save Temporary Image");
-	mUploadStatusMap[UploadStatus::UnknownError] = QLatin1String("Unknown Error");
-	mUploadStatusMap[UploadStatus::WebError] = QLatin1String("Web Error");
-	mUploadStatusMap[UploadStatus::WriteError] = QLatin1String("Write Error");
 }
 
 void EnumTranslator::mapCaptureModeEnum()
@@ -78,6 +54,7 @@ void EnumTranslator::mapCaptureModeEnum()
 	mCaptureModeMap[CaptureModes::ActiveWindow] = tr("Active Window");
 	mCaptureModeMap[CaptureModes::WindowUnderCursor] = tr("Window Under Cursor");
 	mCaptureModeMap[CaptureModes::Portal] = tr("Screenshot Portal");
+	mCaptureModeMap[CaptureModes::Scrolling] = tr("Scrolling Area (Long Screenshot)");
 }
 
 void EnumTranslator::mapPluginTypeEnum()

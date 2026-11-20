@@ -9,18 +9,7 @@ set(KSNIP_SRCS
 	${CMAKE_SOURCE_DIR}/src/backend/imageGrabber/IImageGrabber.h
 	${CMAKE_SOURCE_DIR}/src/backend/imageGrabber/AbstractImageGrabber.cpp
 	${CMAKE_SOURCE_DIR}/src/backend/imageGrabber/AbstractRectAreaImageGrabber.cpp
-	${CMAKE_SOURCE_DIR}/src/backend/uploader/IUploader.h
-	${CMAKE_SOURCE_DIR}/src/backend/uploader/UploadHandler.cpp
-	${CMAKE_SOURCE_DIR}/src/backend/uploader/IUploadHandler.h
-	${CMAKE_SOURCE_DIR}/src/backend/uploader/imgur/IImgurUploader.h
-	${CMAKE_SOURCE_DIR}/src/backend/uploader/imgur/ImgurWrapper.cpp
-	${CMAKE_SOURCE_DIR}/src/backend/uploader/imgur/ImgurResponse.cpp
-	${CMAKE_SOURCE_DIR}/src/backend/uploader/imgur/ImgurUploader.cpp
-	${CMAKE_SOURCE_DIR}/src/backend/uploader/imgur/ImgurResponseLogger.cpp
-	${CMAKE_SOURCE_DIR}/src/backend/uploader/script/IScriptUploader.h
-	${CMAKE_SOURCE_DIR}/src/backend/uploader/script/ScriptUploader.cpp
-	${CMAKE_SOURCE_DIR}/src/backend/uploader/ftp/IFtpUploader.h
-	${CMAKE_SOURCE_DIR}/src/backend/uploader/ftp/FtpUploader.cpp
+	${CMAKE_SOURCE_DIR}/src/backend/imageGrabber/ScrollingImageStitcher.cpp
 	${CMAKE_SOURCE_DIR}/src/backend/saver/SavePathProvider.cpp
 	${CMAKE_SOURCE_DIR}/src/backend/saver/ImageSaver.cpp
 	${CMAKE_SOURCE_DIR}/src/backend/saver/WildcardResolver.cpp
@@ -73,8 +62,8 @@ set(KSNIP_SRCS
 	${CMAKE_SOURCE_DIR}/src/widgets/CustomLineEdit.cpp
 	${CMAKE_SOURCE_DIR}/src/widgets/ProcessIndicator.cpp
 	${CMAKE_SOURCE_DIR}/src/gui/MainWindow.cpp
+	${CMAKE_SOURCE_DIR}/src/gui/CaptureHistoryDialog.cpp
 	${CMAKE_SOURCE_DIR}/src/gui/RecentImagesMenu.cpp
-	${CMAKE_SOURCE_DIR}/src/gui/ImgurHistoryDialog.cpp
 	${CMAKE_SOURCE_DIR}/src/gui/TrayIcon.cpp
 	${CMAKE_SOURCE_DIR}/src/gui/actions/Action.cpp
 	${CMAKE_SOURCE_DIR}/src/gui/actions/ActionProcessor.cpp
@@ -114,17 +103,11 @@ set(KSNIP_SRCS
 	${CMAKE_SOURCE_DIR}/src/gui/settingsDialog/actions/ActionsSettings.cpp
 	${CMAKE_SOURCE_DIR}/src/gui/settingsDialog/actions/ActionSettingTab.cpp
 	${CMAKE_SOURCE_DIR}/src/gui/settingsDialog/actions/EmptyActionSettingTab.cpp
-	${CMAKE_SOURCE_DIR}/src/gui/settingsDialog/uploader/UploaderSettings.cpp
-	${CMAKE_SOURCE_DIR}/src/gui/settingsDialog/uploader/ImgurUploaderSettings.cpp
-	${CMAKE_SOURCE_DIR}/src/gui/settingsDialog/uploader/ScriptUploaderSettings.cpp
-	${CMAKE_SOURCE_DIR}/src/gui/settingsDialog/uploader/FtpUploaderSettings.cpp
 	${CMAKE_SOURCE_DIR}/src/gui/settingsDialog/plugins/PluginsSettings.cpp
 	${CMAKE_SOURCE_DIR}/src/gui/aboutDialog/AboutDialog.cpp
 	${CMAKE_SOURCE_DIR}/src/gui/aboutDialog/AboutTab.cpp
 	${CMAKE_SOURCE_DIR}/src/gui/aboutDialog/VersionTab.cpp
 	${CMAKE_SOURCE_DIR}/src/gui/aboutDialog/AuthorTab.cpp
-	${CMAKE_SOURCE_DIR}/src/gui/aboutDialog/DonateTab.cpp
-	${CMAKE_SOURCE_DIR}/src/gui/aboutDialog/ContactTab.cpp
 	${CMAKE_SOURCE_DIR}/src/gui/globalHotKeys/GlobalHotKey.cpp
 	${CMAKE_SOURCE_DIR}/src/gui/globalHotKeys/NativeKeyEventFilter.cpp
 	${CMAKE_SOURCE_DIR}/src/gui/globalHotKeys/GlobalHotKeyHandler.cpp
@@ -138,8 +121,6 @@ set(KSNIP_SRCS
 	${CMAKE_SOURCE_DIR}/src/gui/operations/UpdateWatermarkOperation.cpp
 	${CMAKE_SOURCE_DIR}/src/gui/operations/WatermarkImagePreparer.cpp
 	${CMAKE_SOURCE_DIR}/src/gui/operations/CanDiscardOperation.cpp
-	${CMAKE_SOURCE_DIR}/src/gui/operations/UploadOperation.cpp
-	${CMAKE_SOURCE_DIR}/src/gui/operations/HandleUploadResultOperation.cpp
 	${CMAKE_SOURCE_DIR}/src/gui/operations/NotifyOperation.cpp
 	${CMAKE_SOURCE_DIR}/src/gui/operations/DeleteImageOperation.cpp
 	${CMAKE_SOURCE_DIR}/src/gui/operations/CopyAsDataUriOperation.cpp
@@ -258,7 +239,6 @@ endif ()
 set(DEPENDENCY_LIBRARIES
         Qt${QT_MAJOR_VERSION}::Widgets
         Qt${QT_MAJOR_VERSION}::Network
-        Qt${QT_MAJOR_VERSION}::Xml
         Qt${QT_MAJOR_VERSION}::PrintSupport
         Qt${QT_MAJOR_VERSION}::Svg
         )
@@ -316,13 +296,6 @@ if (WIN32)
         install(CODE "execute_process(COMMAND ${WINDEPLOYQT} ${WINDEPLOYQT_PARAMETERS} . WORKING_DIRECTORY \${CMAKE_INSTALL_PREFIX})")
 
         find_program(COPY cp)
-
-        if (DEFINED ENV{OPENSSL_DIR})
-                file(TO_CMAKE_PATH "$ENV{OPENSSL_DIR}" OPENSSL_DIR)
-                install(CODE "execute_process(COMMAND ${COPY} ${OPENSSL_DIR}/*.dll \${CMAKE_INSTALL_PREFIX})")
-        else ()
-                message("OPENSSL_DIR not set, not able to install openssl dependencies, skipping.")
-        endif()
 
         if (DEFINED ENV{COMPILE_RUNTIME_DIR})
                 file(TO_CMAKE_PATH "$ENV{COMPILE_RUNTIME_DIR}" COMPILE_RUNTIME_DIR)

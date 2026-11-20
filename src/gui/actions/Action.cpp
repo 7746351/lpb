@@ -24,7 +24,6 @@ Action::Action() :
 	mCaptureDelay(0),
 	mCaptureMode(CaptureModes::RectArea),
 	mIsPinImageEnabled(false),
-	mIsUploadEnabled(false),
 	mIsSaveEnabled(false),
 	mIsCopyToClipboardEnabled(false),
 	mIsOpenDirectoryEnabled(false),
@@ -105,16 +104,6 @@ void Action::setIsPinImageEnabled(bool enabled)
 	mIsPinImageEnabled = enabled;
 }
 
-bool Action::isUploadEnabled() const
-{
-	return mIsUploadEnabled;
-}
-
-void Action::setIsUploadEnabled(bool enabled)
-{
-	mIsUploadEnabled = enabled;
-}
-
 bool Action::isSaveEnabled() const
 {
 	return mIsSaveEnabled;
@@ -178,6 +167,5 @@ bool operator==(const Action &left, const Action &right)
 		   && left.isCopyToClipboardEnabled() == right.isCopyToClipboardEnabled()
 		   && left.isPinImageEnabled() == right.isPinImageEnabled()
 		   && left.isOpenDirectoryEnabled() == right.isOpenDirectoryEnabled()
-		   && left.isUploadEnabled() == right.isUploadEnabled()
 		   && left.isHideMainWindowEnabled() == right.isHideMainWindowEnabled();
 }

@@ -32,7 +32,6 @@ MainWindow::MainWindow(DependencyInjector *dependencyInjector) :
 	mImageAnnotator(new KImageAnnotatorAdapter),
 	mSaveAsAction(new QAction(this)),
 	mSaveAllAction(new QAction(this)),
-	mUploadAction(new QAction(this)),
 	mCopyAsDataUriAction(new QAction(this)),
 	mPrintAction(new QAction(this)),
 	mPrintPreviewAction(new QAction(this)),
@@ -44,6 +43,7 @@ MainWindow::MainWindow(DependencyInjector *dependencyInjector) :
 	mSettingsAction(new QAction(this)),
 	mAboutAction(new QAction(this)),
 	mOpenImageAction(new QAction(this)),
+	mHistoryAction(new QAction(this)),
 	mScaleAction(new QAction(this)),
 	mRotateAction(new QAction(this)),
 	mAddWatermarkAction(new QAction(this)),
@@ -62,7 +62,6 @@ MainWindow::MainWindow(DependencyInjector *dependencyInjector) :
 	mCapturePrinter(new CapturePrinter(this)),
 	mGlobalHotKeyHandler(new GlobalHotKeyHandler(mImageGrabber->supportedCaptureModes(), mDependencyInjector->get<IPlatformChecker>(), mConfig)),
 	mDragAndDropProcessor(new DragAndDropProcessor(this, mDependencyInjector->get<ITempFileProvider>())),
-	mUploadHandler(mDependencyInjector->get<IUploadHandler>()),
 	mSessionManagerRequestedQuit(false),
 	mResizeOnNormalize(false),
 	mCaptureHandler(CaptureHandlerFactory::create(mImageAnnotator, mNotificationService, mDependencyInjector, this)),
@@ -96,14 +95,11 @@ MainWindow::MainWindow(DependencyInjector *dependencyInjector) :
 	connect(mGlobalHotKeyHandler, &GlobalHotKeyHandler::captureTriggered, this, &MainWindow::triggerCapture);
 	connect(mGlobalHotKeyHandler, &GlobalHotKeyHandler::actionTriggered, this, &MainWindow::actionTriggered);
 
-	connect(mUploadHandler.data(), &IUploadHandler::finished, this, &MainWindow::uploadFinished);
-
 	connect(mRecentImagesMenu, &RecentImagesMenu::openRecentSelected, this, &MainWindow::loadImageFromFile);
 
 	connect(this, &MainWindow::imageLoaded, mActionProcessor, &ActionProcessor::captureFinished);
 	connect(mActionProcessor, &ActionProcessor::triggerCapture, this, &MainWindow::capture);
 	connect(mActionProcessor, &ActionProcessor::triggerPinImage, mPinAction, &QAction::trigger);
-	connect(mActionProcessor, &ActionProcessor::triggerUpload, mUploadAction, &QAction::trigger);
 	connect(mActionProcessor, &ActionProcessor::triggerOpenDirectory, mCaptureHandler, &ICaptureHandler::openDirectory);
 	connect(mActionProcessor, &ActionProcessor::triggerCopyToClipboard, mToolBar->copyToClipboardAction(), &QAction::trigger);
 	connect(mActionProcessor, &ActionProcessor::triggerSave, mToolBar->saveAction(), &QAction::trigger);
@@ -323,7 +319,6 @@ void MainWindow::setEnablements(bool enabled)
 {
 	mPrintAction->setEnabled(enabled);
 	mPrintPreviewAction->setEnabled(enabled);
-	mUploadAction->setEnabled(enabled);
 	mCopyAsDataUriAction->setEnabled(enabled);
 	mScaleAction->setEnabled(enabled);
 	mRotateAction->setEnabled(enabled);
@@ -420,11 +415,6 @@ void MainWindow::initGui()
 	mSaveAllAction->setIcon(iconLoader->loadForTheme(QLatin1String("save")));
 	connect(mSaveAllAction, &QAction::triggered, this, &MainWindow::saveAllClicked);
 
-	mUploadAction->setText(tr("Upload"));
-	mUploadAction->setToolTip(tr("Upload triggerCapture to external source"));
-	mUploadAction->setShortcut(Qt::SHIFT | Qt::Key_U);
-	connect(mUploadAction, &QAction::triggered, this, &MainWindow::upload);
-
 	mCopyAsDataUriAction->setText(tr("Copy as data URI"));
 	mCopyAsDataUriAction->setToolTip(tr("Copy triggerCapture to system clipboard"));
 	connect(mCopyAsDataUriAction, &QAction::triggered, this, &MainWindow::copyAsDataUri);
@@ -497,6 +487,10 @@ void MainWindow::initGui()
 	mRecentImagesMenu->setTitle(tr("Open &Recent"));
 	mRecentImagesMenu->setIcon(QIcon::fromTheme(QLatin1String("document-open")));
 
+	mHistoryAction->setText(tr("History"));
+	mHistoryAction->setIcon(QIcon::fromTheme(QLatin1String("document-open-recent")));
+	connect(mHistoryAction, &QAction::triggered, this, &MainWindow::showHistoryDialog);
+
 	mPasteAction->setText(tr("Paste"));
 	mPasteAction->setIcon(iconLoader->loadForTheme(QLatin1String("paste")));
 	mPasteAction->setShortcut(Qt::CTRL | Qt::Key_V);
@@ -542,10 +536,10 @@ void MainWindow::initGui()
 	menu->addSeparator();
 	menu->addAction(mOpenImageAction);
 	menu->addMenu(mRecentImagesMenu);
+	menu->addAction(mHistoryAction);
 	menu->addAction(mToolBar->saveAction());
 	menu->addAction(mSaveAsAction);
 	menu->addAction(mSaveAllAction);
-	menu->addAction(mUploadAction);
 	menu->addSeparator();
 	menu->addAction(mPrintAction);
 	menu->addAction(mPrintPreviewAction);
@@ -590,7 +584,6 @@ void MainWindow::initGui()
 		mTrayIcon->setSaveAction(mToolBar->saveAction());
 		mTrayIcon->setPasteAction(mPasteAction);
 		mTrayIcon->setCopyAction(mToolBar->copyToClipboardAction());
-		mTrayIcon->setUploadAction(mUploadAction);
 		mTrayIcon->setQuitAction(mQuitAction);
 		mTrayIcon->setActionsMenu(mActionsMenu);
 		mTrayIcon->setEnabled(true);
@@ -602,13 +595,6 @@ void MainWindow::initGui()
 void MainWindow::copyCaptureToClipboard()
 {
 	mCaptureHandler->copy();
-}
-
-void MainWindow::upload()
-{
-	auto image = mCaptureHandler->image();
-	UploadOperation operation(image, mUploadHandler, mConfig, mDependencyInjector->get<IMessageBoxService>());
-	operation.execute();
 }
 
 void MainWindow::copyAsDataUri()
@@ -640,6 +626,13 @@ void MainWindow::showOpenImageDialog()
 	for (const auto &path : pathList) {
 		loadImageFromFile(path);
 	}
+}
+
+void MainWindow::showHistoryDialog()
+{
+	CaptureHistoryDialog dialog(mDependencyInjector->get<IRecentImageService>(), this);
+	connect(&dialog, &CaptureHistoryDialog::openRequested, this, &MainWindow::loadImageFromFile);
+	dialog.exec();
 }
 
 void MainWindow::setupImageAnnotator()
@@ -774,12 +767,6 @@ void MainWindow::sessionFinished()
 void MainWindow::captureCanceled()
 {
 	mVisibilityHandler->restoreState();
-}
-
-void MainWindow::uploadFinished(const UploadResult &result)
-{
-	HandleUploadResultOperation handleUploadResponseOperation(result, mNotificationService, mClipboard, mDependencyInjector->get<IDesktopService>(), mConfig);
-	handleUploadResponseOperation.execute();
 }
 
 void MainWindow::captureEmpty()

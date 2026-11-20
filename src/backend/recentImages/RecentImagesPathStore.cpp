@@ -21,45 +21,74 @@
 
 RecentImagesPathStore::RecentImagesPathStore(const QSharedPointer<IImagePathStorage> &imagePathStorage) :
 	mImagePathStorage(imagePathStorage),
-	mMaxRecentItems(10)
+	mMaxRecentItems(10),
+	mMaxHistoryItems(200)
 {
 	Q_ASSERT(mImagePathStorage != nullptr);
 
-	loadRecentImagesPath();
+	loadImagesPath();
 }
 
-void RecentImagesPathStore::loadRecentImagesPath()
+void RecentImagesPathStore::loadImagesPath()
 {
 	const auto storedImageCount = mImagePathStorage->count();
 	for (auto i = 0; i < storedImageCount; ++i) {
-		mRecentImagesPathCache.enqueue(mImagePathStorage->load(i));
+		const auto path = mImagePathStorage->load(i);
+		if (!path.isEmpty() && !mImagesPathCache.contains(path)) {
+			mImagesPathCache.append(path);
+		}
 	}
 }
 
 void RecentImagesPathStore::storeImagePath(const QString &imagePath)
 {
-	if (mRecentImagesPathCache.contains(imagePath)) {
+	if (imagePath.isEmpty()) {
 		return;
 	}
 
-	if (mRecentImagesPathCache.size() == mMaxRecentItems) {
-		mRecentImagesPathCache.dequeue();
+	if (mImagesPathCache.contains(imagePath)) {
+		return;
 	}
 
-	mRecentImagesPathCache.enqueue(imagePath);
-	saveRecentImagesPath();
+	while (mImagesPathCache.size() >= mMaxHistoryItems) {
+		mImagesPathCache.removeFirst();
+	}
+
+	mImagesPathCache.append(imagePath);
+	saveImagesPath();
 }
 
-void RecentImagesPathStore::saveRecentImagesPath()
+void RecentImagesPathStore::removeImagePath(const QString &imagePath)
 {
-	for (auto i = 0 ; i < mRecentImagesPathCache.size(); ++i) {
-		mImagePathStorage->store(mRecentImagesPathCache.at(i), i);
+	if (mImagesPathCache.removeAll(imagePath) > 0) {
+		saveImagesPath();
+	}
+}
+
+void RecentImagesPathStore::saveImagesPath()
+{
+	mImagePathStorage->clear();
+	for (auto i = 0; i < mImagesPathCache.size(); ++i) {
+		mImagePathStorage->store(mImagesPathCache.at(i), i);
 	}
 }
 
 QStringList RecentImagesPathStore::getRecentImagesPath() const
 {
-	QStringList reversedList = mRecentImagesPathCache;
+	QStringList reversedList;
+	const auto recentCount = std::min(mMaxRecentItems, static_cast<int>(mImagesPathCache.size()));
+	reversedList.reserve(recentCount);
+
+	for (auto i = mImagesPathCache.size() - 1; i >= mImagesPathCache.size() - recentCount; --i) {
+		reversedList.append(mImagesPathCache.at(i));
+	}
+
+	return reversedList;
+}
+
+QStringList RecentImagesPathStore::getHistoryImagesPath() const
+{
+	QStringList reversedList = mImagesPathCache;
 	std::reverse(reversedList.begin(), reversedList.end());
 
 	return reversedList;

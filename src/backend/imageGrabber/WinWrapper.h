@@ -24,6 +24,7 @@
 #include <QPainter>
 
 #include <wtypes.h>
+#include <windows.h>
 #include <dwmapi.h>
 
 #include "src/common/dtos/CursorDto.h"
@@ -34,6 +35,10 @@ public:
     QRect getFullScreenRect() const;
     QRect getActiveWindowRect() const;
 	CursorDto getCursorWithPosition() const;
+	QPoint cursorPosition() const;
+	void setCursorPosition(const QPoint &position) const;
+	void scrollDown(int steps) const;
+	bool isEscapePressed() const;
 
 private:
     QPixmap getCursorPixmap(const CURSORINFO &cursor) const;

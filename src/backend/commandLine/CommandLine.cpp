@@ -45,7 +45,6 @@ CommandLine::~CommandLine()
     delete mSaveOption;
     delete mSaveToOption;
     delete mVersionOption;
-    delete mUploadOption;
 }
 
 void CommandLine::addImageGrabberOptions(const QList<CaptureModes> &captureModes)
@@ -80,7 +79,6 @@ void CommandLine::addDefaultOptions()
     mEditOption = addParameterOption(QLatin1String("e"), QLatin1String("edit"), QLatin1String("Edit existing image in ksnip."), QLatin1String("image"));
     mSaveOption = addOption(QLatin1String("s"), QLatin1String("save"), QLatin1String("Save screenshot to default location without opening in editor."));
     mSaveToOption = addParameterOption(QLatin1String("p"),QLatin1String("saveto"),QLatin1String("Save screenshot to provided path without opening in editor."), QLatin1String("path"));
-	mUploadOption = addOption(QLatin1String("o"), QLatin1String("upload"), QLatin1String("Upload screenshot via default uploader without opening in editor."));
 }
 
 void CommandLine::addVersionOptions()
@@ -187,11 +185,6 @@ QString CommandLine::saveToPath() const
 bool CommandLine::isCaptureModeSet() const
 {
     return isRectAreaSet() || isLastRectAreaSet() || isFullScreenSet() || isCurrentScreenSet() || isActiveWindowSet() || isWindowsUnderCursorSet();
-}
-
-bool CommandLine::isUploadSet() const
-{
-	return mUploadOption != nullptr && isSet(*mUploadOption);
 }
 
 CaptureModes CommandLine::captureMode() const

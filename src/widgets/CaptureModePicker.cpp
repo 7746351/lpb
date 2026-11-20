@@ -107,6 +107,16 @@ void CaptureModePicker::init(const QList<CaptureModes> &captureModes, const QSha
         menu->addAction(action);
     }
 
+    if (isCaptureModeSupported(captureModes, CaptureModes::Scrolling)) {
+        auto action = createAction(
+				EnumTranslator::instance()->toTranslatedString(CaptureModes::Scrolling),
+	            tr("Select an area, then scroll it automatically to capture a long screenshot"),
+				iconLoader->loadForTheme(QLatin1String("fullScreen.svg")),
+	            CaptureModes::Scrolling,
+	            QKeySequence(Qt::SHIFT | Qt::Key_S));
+        menu->addAction(action);
+    }
+
     if (isCaptureModeSupported(captureModes, CaptureModes::Portal)) {
         auto action = createAction(
 				EnumTranslator::instance()->toTranslatedString(CaptureModes::Portal),

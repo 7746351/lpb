@@ -23,7 +23,6 @@
 #include <QObject>
 
 #include "src/common/enum/TrayIconDefaultActionMode.h"
-#include "src/common/enum/UploaderType.h"
 #include "src/common/enum/SaveQualityMode.h"
 #include "src/common/enum/CaptureModes.h"
 
@@ -232,80 +231,6 @@ public:
 
 	virtual int implicitCaptureDelay() const = 0;
 	virtual void setImplicitCaptureDelay(int delay) = 0;
-
-	// Uploader
-
-	virtual bool confirmBeforeUpload() const = 0;
-	virtual void setConfirmBeforeUpload(bool enabled) = 0;
-
-	virtual UploaderType uploaderType() const = 0;
-	virtual void setUploaderType(UploaderType type) = 0;
-
-	// Imgur Uploader
-
-	virtual QString imgurUsername() const = 0;
-	virtual void setImgurUsername(const QString &username) = 0;
-
-	virtual QByteArray imgurClientId() const = 0;
-	virtual void setImgurClientId(const QString &clientId) = 0;
-
-	virtual QByteArray imgurClientSecret() const = 0;
-	virtual void setImgurClientSecret(const QString &clientSecret) = 0;
-
-	virtual QByteArray imgurAccessToken() const = 0;
-	virtual void setImgurAccessToken(const QString &accessToken) = 0;
-
-	virtual QByteArray imgurRefreshToken() const = 0;
-	virtual void setImgurRefreshToken(const QString &refreshToken) = 0;
-
-	virtual bool imgurForceAnonymous() const = 0;
-	virtual void setImgurForceAnonymous(bool enabled) = 0;
-
-	virtual bool imgurLinkDirectlyToImage() const = 0;
-	virtual void setImgurLinkDirectlyToImage(bool enabled) = 0;
-
-	virtual bool imgurAlwaysCopyToClipboard() const = 0;
-	virtual void setImgurAlwaysCopyToClipboard(bool enabled) = 0;
-
-	virtual bool imgurOpenLinkInBrowser() const = 0;
-	virtual void setImgurOpenLinkInBrowser(bool enabled) = 0;
-
-	virtual QString imgurUploadTitle() const = 0;
-	virtual void setImgurUploadTitle(const QString &uploadTitle) = 0;
-
-	virtual QString imgurUploadDescription() const = 0;
-	virtual void setImgurUploadDescription(const QString &uploadDescription) = 0;
-
-	virtual QString imgurBaseUrl() const = 0;
-	virtual void setImgurBaseUrl(const QString &baseUrl) = 0;
-
-	// Script Uploader
-
-	virtual QString uploadScriptPath() const = 0;
-	virtual void setUploadScriptPath(const QString &path) = 0;
-
-	virtual bool uploadScriptCopyOutputToClipboard() const = 0;
-	virtual void setUploadScriptCopyOutputToClipboard(bool enabled) = 0;
-
-	virtual QString uploadScriptCopyOutputFilter() const = 0;
-	virtual void setUploadScriptCopyOutputFilter(const QString &regex) = 0;
-
-	virtual bool uploadScriptStopOnStdErr() const = 0;
-	virtual void setUploadScriptStopOnStdErr(bool enabled) = 0;
-
-	// FTP Uploader
-
-	virtual bool ftpUploadForceAnonymous() const = 0;
-	virtual void setFtpUploadForceAnonymous(bool enabled) = 0;
-
-	virtual QString ftpUploadUrl() const = 0;
-	virtual void setFtpUploadUrl(const QString &path) = 0;
-
-	virtual QString ftpUploadUsername() const = 0;
-	virtual void setFtpUploadUsername(const QString &username) = 0;
-
-	virtual QString ftpUploadPassword() const = 0;
-	virtual void setFtpUploadPassword(const QString &password) = 0;
 
 	// HotKeys
 

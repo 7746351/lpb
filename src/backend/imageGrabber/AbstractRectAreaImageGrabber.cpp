@@ -150,6 +150,7 @@ void AbstractRectAreaImageGrabber::setCaptureRectFromCorrectSource()
 {
 	switch (captureMode()) {
 		case CaptureModes::RectArea:
+		case CaptureModes::Scrolling:
 			mCaptureRect = selectedSnippingAreaRect();
 			break;
 		case CaptureModes::LastRectArea:
@@ -263,10 +264,15 @@ CursorDto AbstractRectAreaImageGrabber::getCursorImageWithPositionFromCorrectSou
 
 bool AbstractRectAreaImageGrabber::isRectAreaCaptureWithBackground() const
 {
-	return captureMode() == CaptureModes::RectArea && !isSnippingAreaBackgroundTransparent();
+	return isRectAreaCaptureMode() && !isSnippingAreaBackgroundTransparent();
 }
 
 bool AbstractRectAreaImageGrabber::isRectAreaCaptureWithoutBackground() const
 {
-	return captureMode() == CaptureModes::RectArea && isSnippingAreaBackgroundTransparent();
+	return isRectAreaCaptureMode() && isSnippingAreaBackgroundTransparent();
+}
+
+bool AbstractRectAreaImageGrabber::isRectAreaCaptureMode() const
+{
+	return captureMode() == CaptureModes::RectArea || captureMode() == CaptureModes::Scrolling;
 }

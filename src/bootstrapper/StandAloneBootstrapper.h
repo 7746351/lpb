@@ -75,7 +75,6 @@ private:
 	bool isCommandLineCaptureRequested() const;
 	int takeCaptureAndProcess(const QApplication &app);
 	bool getIsSave() const;
-	bool getIsUpload() const;
 
 private slots:
 	void openMainWindow(const CaptureDto &captureDto);

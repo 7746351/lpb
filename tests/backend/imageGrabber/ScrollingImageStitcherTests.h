@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2020 Damir Porobic <damir.porobic@gmx.com>
+ * Copyright (C) 2021 Damir Porobic <damir.porobic@gmx.com>
  *
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -17,26 +17,18 @@
  * Boston, MA 02110-1301, USA.
  */
 
-#ifndef KSNIP_DONATETAB_H
-#define KSNIP_DONATETAB_H
+#ifndef KSNIP_SCROLLINGIMAGESTITCHERTESTS_H
+#define KSNIP_SCROLLINGIMAGESTITCHERTESTS_H
 
-#include <QWidget>
-#include <QVBoxLayout>
-#include <QLabel>
-#include <QApplication>
-#include "BuildConfig.h"
+#include <QtTest>
 
-class DonateTab : public QWidget
+class ScrollingImageStitcherTests : public QObject
 {
 	Q_OBJECT
-public:
-	DonateTab();
-	~DonateTab() override;
-
-private:
-	QLabel *mContent;
-	QVBoxLayout *mLayout;
+private slots:
+	void AddFrame_Should_AppendNewContent_When_FrameOverlapsExistingImage();
+	void AddFrame_Should_ReturnDuplicate_When_FrameAlreadyContained();
+	void AddFrame_Should_ReturnFailed_When_FrameWidthDiffers();
 };
 
-
-#endif //KSNIP_DONATETAB_H
+#endif //KSNIP_SCROLLINGIMAGESTITCHERTESTS_H

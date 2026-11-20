@@ -69,6 +69,7 @@ private:
 	CursorDto getCursorImageWithPositionFromCorrectSource() const;
 	bool isRectAreaCaptureWithBackground() const;
 	bool isRectAreaCaptureWithoutBackground() const;
+	bool isRectAreaCaptureMode() const;
 	CursorDto getCursorRelativeToScreenshot() const;
     void storeCursorForPostProcessing(const QRect &screenRect);
 };

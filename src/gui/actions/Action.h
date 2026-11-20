@@ -52,9 +52,6 @@ public:
 	bool includeCursor() const;
 	void setIncludeCursor(bool enabled);
 
-	bool isUploadEnabled() const;
-	void setIsUploadEnabled(bool enabled);
-
 	bool isSaveEnabled() const;
 	void setIsSaveEnabled(bool enabled);
 
@@ -79,7 +76,6 @@ private:
 	bool mIncludeCursor;
 	CaptureModes mCaptureMode;
 	bool mIsPinImageEnabled;
-	bool mIsUploadEnabled;
 	bool mIsSaveEnabled;
 	bool mIsCopyToClipboardEnabled;
 	bool mIsOpenDirectoryEnabled;

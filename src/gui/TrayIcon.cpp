@@ -26,7 +26,6 @@ TrayIcon::TrayIcon(const QSharedPointer<IConfig> &config, const QSharedPointer<I
 	mSaveAction(nullptr),
 	mPasteAction(nullptr),
 	mCopyAction(nullptr),
-	mUploadAction(nullptr),
 	mShowEditorAction(nullptr),
 	mQuitAction(nullptr),
 	mActionsMenu(nullptr)
@@ -55,7 +54,6 @@ void TrayIcon::setupMenu()
 	mMenu.addAction(mSaveAction);
 	mMenu.addAction(mPasteAction);
 	mMenu.addAction(mCopyAction);
-	mMenu.addAction(mUploadAction);
 	mMenu.addSeparator();
 	mMenu.addAction(mQuitAction);
 	setContextMenu(&mMenu);
@@ -89,11 +87,6 @@ void TrayIcon::setPasteAction(QAction *action)
 void TrayIcon::setCopyAction(QAction *action)
 {
 	mCopyAction = action;
-}
-
-void TrayIcon::setUploadAction(QAction *action)
-{
-	mUploadAction = action;
 }
 
 void TrayIcon::setQuitAction(QAction *action)
@@ -162,6 +155,6 @@ void TrayIcon::triggerDefaultCaptureMode() const
 void TrayIcon::openContentUrl()
 {
 	if(!mToastContentUrl.isEmpty() && !mToastContentUrl.isNull()) {
-		QDesktopServices::openUrl(mToastContentUrl);
+		QDesktopServices::openUrl(QUrl::fromLocalFile(mToastContentUrl));
 	}
 }

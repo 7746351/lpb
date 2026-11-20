@@ -28,8 +28,6 @@
 #include "AboutTab.h"
 #include "VersionTab.h"
 #include "AuthorTab.h"
-#include "DonateTab.h"
-#include "ContactTab.h"
 
 class QLabel;
 class MainWindow;
@@ -49,8 +47,6 @@ private:
     AboutTab *mAboutTab;
     VersionTab *mVersionTab;
     AuthorTab *mAuthorTab;
-    DonateTab *mDonateTab;
-	ContactTab *mContactTab;
 
     void createHeader();
 };

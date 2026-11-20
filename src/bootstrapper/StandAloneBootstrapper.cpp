@@ -67,17 +67,11 @@ int StandAloneBootstrapper::takeCaptureAndProcess(const QApplication &app)
 
 	CommandLineCaptureParameter parameter(getCaptureMode(), getDelay(), getCaptureCursor());
 	parameter.isWithSave = getIsSave();
-	parameter.isWithUpload = getIsUpload();
 	parameter.savePath = getSavePath();
 
 	mCommandLineCaptureHandler->captureAndProcessScreenshot(parameter);
 
 	return app.exec();
-}
-
-bool StandAloneBootstrapper::getIsUpload() const
-{
-	return mCommandLine->isUploadSet();
 }
 
 bool StandAloneBootstrapper::getIsSave() const
@@ -87,7 +81,7 @@ bool StandAloneBootstrapper::getIsSave() const
 
 bool StandAloneBootstrapper::isCommandLineCaptureRequested() const
 {
-	return getIsSave() || getIsUpload();
+	return getIsSave();
 }
 
 bool StandAloneBootstrapper::isEditRequested() const

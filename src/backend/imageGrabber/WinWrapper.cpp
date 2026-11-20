@@ -50,6 +50,32 @@ CursorDto WinWrapper::getCursorWithPosition() const
 	return {cursorPixmap, cursorPosition};
 }
 
+QPoint WinWrapper::cursorPosition() const
+{
+	POINT position;
+	GetCursorPos(&position);
+	return { position.x, position.y };
+}
+
+void WinWrapper::setCursorPosition(const QPoint &position) const
+{
+	SetCursorPos(position.x(), position.y());
+}
+
+void WinWrapper::scrollDown(int steps) const
+{
+	INPUT input = {};
+	input.type = INPUT_MOUSE;
+	input.mi.dwFlags = MOUSEEVENTF_WHEEL;
+	input.mi.mouseData = static_cast<DWORD>(-WHEEL_DELTA * steps);
+	SendInput(1, &input, sizeof(INPUT));
+}
+
+bool WinWrapper::isEscapePressed() const
+{
+	return (GetAsyncKeyState(VK_ESCAPE) & 0x8000) != 0;
+}
+
 QPoint WinWrapper::getCursorPosition(const QRect &rect, const CURSORINFO &cursor) const
 {
     ICONINFOEXW iconInfo = { sizeof(iconInfo) };

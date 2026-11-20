@@ -32,7 +32,8 @@ enum class CaptureModes
     CurrentScreen,
     ActiveWindow,
     WindowUnderCursor,
-    Portal
+    Portal,
+    Scrolling
 };
 
 inline uint qHash(const CaptureModes captureMode, uint seed) {

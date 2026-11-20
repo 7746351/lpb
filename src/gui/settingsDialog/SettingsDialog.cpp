@@ -40,11 +40,8 @@ SettingsDialog::SettingsDialog(
 	mEmptyWidget(new QWidget()),
 	mApplicationSettings(new ApplicationSettings(mConfig, fileDialogService)),
 	mImageGrabberSettings(new ImageGrabberSettings(mConfig)),
-	mImgurUploaderSettings(new ImgurUploaderSettings(mConfig)),
-	mScriptUploaderSettings(new ScriptUploaderSettings(mConfig, fileDialogService)),
 	mAnnotationSettings(new AnnotationSettings(mConfig, mScaledSizeProvider)),
 	mHotKeySettings(new HotKeySettings(captureModes, platformChecker, mConfig)),
-	mUploaderSettings(new UploaderSettings(mConfig)),
 	mSaverSettings(new SaverSettings(mConfig, fileDialogService)),
 	mStickerSettings(new StickerSettings(mConfig, directoryPathProvider)),
 	mTrayIconSettings(new TrayIconSettings(captureModes, mConfig)),
@@ -52,8 +49,7 @@ SettingsDialog::SettingsDialog(
 	mWatermarkSettings(new WatermarkSettings(mConfig, mScaledSizeProvider)),
 	mActionsSettings(new ActionsSettings(captureModes, platformChecker, mConfig)),
 	mPluginsSettings(new PluginsSettings(mConfig, fileDialogService, pluginFinder)),
-	mSearchSettingsLineEdit(new QLineEdit(this)),
-	mFtpUploaderSettings(new FtpUploaderSettings(mConfig))
+	mSearchSettingsLineEdit(new QLineEdit(this))
 {
 	setWindowTitle(QApplication::applicationName() + QLatin1String(" - ") + tr("Settings"));
 
@@ -72,17 +68,14 @@ SettingsDialog::~SettingsDialog()
 	delete mEmptyWidget;
 	delete mApplicationSettings;
 	delete mImageGrabberSettings;
-	delete mImgurUploaderSettings;
 	delete mAnnotationSettings;
 	delete mHotKeySettings;
-	delete mUploaderSettings;
 	delete mSaverSettings;
 	delete mStickerSettings;
 	delete mTrayIconSettings;
 	delete mSnippingAreaSettings;
 	delete mWatermarkSettings;
 	delete mActionsSettings;
-	delete mFtpUploaderSettings;
 	delete mPluginsSettings;
 }
 
@@ -90,9 +83,6 @@ void SettingsDialog::saveSettings()
 {
 	mApplicationSettings->saveSettings();
 	mImageGrabberSettings->saveSettings();
-	mUploaderSettings->saveSettings();
-	mImgurUploaderSettings->saveSettings();
-	mScriptUploaderSettings->saveSettings();
 	mAnnotationSettings->saveSettings();
 	mHotKeySettings->saveSettings();
 	mSaverSettings->saveSettings();
@@ -101,7 +91,6 @@ void SettingsDialog::saveSettings()
 	mSnippingAreaSettings->saveSettings();
 	mWatermarkSettings->saveSettings();
 	mActionsSettings->saveSettings();
-	mFtpUploaderSettings->saveSettings();
 	mPluginsSettings->saveSettings();
 }
 
@@ -123,10 +112,6 @@ void SettingsDialog::initGui()
 	mStackedLayout->addWidget(mTrayIconSettings);
 	mStackedLayout->addWidget(mImageGrabberSettings);
 	mStackedLayout->addWidget(mSnippingAreaSettings);
-	mStackedLayout->addWidget(mUploaderSettings);
-	mStackedLayout->addWidget(mImgurUploaderSettings);
-	mStackedLayout->addWidget(mFtpUploaderSettings);
-	mStackedLayout->addWidget(mScriptUploaderSettings);
 	mStackedLayout->addWidget(mAnnotationSettings);
 	mStackedLayout->addWidget(mStickerSettings);
 	mStackedLayout->addWidget(mWatermarkSettings);
@@ -140,10 +125,6 @@ void SettingsDialog::initGui()
 	auto trayIcon = new QTreeWidgetItem(application, { tr("Tray Icon") });
 	auto imageGrabber = new QTreeWidgetItem(mTreeWidget, { tr("Image Grabber") });
 	auto snippingArea = new QTreeWidgetItem(imageGrabber, { tr("Snipping Area") });
-	auto uploader = new QTreeWidgetItem(mTreeWidget, { tr("Uploader") });
-	auto imgurUploader = new QTreeWidgetItem(uploader, { tr("Imgur Uploader") });
-	auto ftpUploader = new QTreeWidgetItem(uploader, { tr("FTP Uploader") });
-	auto scriptUploader = new QTreeWidgetItem(uploader, { tr("Script Uploader") });
 	auto annotator = new QTreeWidgetItem(mTreeWidget, { tr("Annotator") });
 	auto stickers = new QTreeWidgetItem(annotator, { tr("Stickers") });
 	auto watermark = new QTreeWidgetItem(annotator, { tr("Watermark") });
@@ -156,10 +137,6 @@ void SettingsDialog::initGui()
 	mNavigatorItems.append(trayIcon);
 	mNavigatorItems.append(imageGrabber);
 	mNavigatorItems.append(snippingArea);
-	mNavigatorItems.append(uploader);
-	mNavigatorItems.append(imgurUploader);
-	mNavigatorItems.append(ftpUploader);
-	mNavigatorItems.append(scriptUploader);
 	mNavigatorItems.append(annotator);
 	mNavigatorItems.append(stickers);
 	mNavigatorItems.append(watermark);
@@ -169,7 +146,6 @@ void SettingsDialog::initGui()
 
 	mTreeWidget->addTopLevelItem(application);
 	mTreeWidget->addTopLevelItem(imageGrabber);
-	mTreeWidget->addTopLevelItem(uploader);
 	mTreeWidget->addTopLevelItem(annotator);
 	mTreeWidget->addTopLevelItem(hotkeys);
 	mTreeWidget->addTopLevelItem(actions);

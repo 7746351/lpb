@@ -28,7 +28,7 @@ ImagePathStorage::ImagePathStorage() :
 
 void ImagePathStorage::store(const QString &value, int index)
 {
-	mSettings.beginWriteArray(mSettingsGroupPrefix);
+	mSettings.beginWriteArray(mSettingsGroupPrefix, index + 1);
 	mSettings.setArrayIndex(index);
 	mSettings.setValue(mSettingsGroupKey, value);
 	mSettings.endArray();
@@ -49,4 +49,10 @@ int ImagePathStorage::count()
 	auto count = mSettings.beginReadArray(mSettingsGroupPrefix);
 	mSettings.endArray();
 	return count;
+}
+
+void ImagePathStorage::clear()
+{
+	mSettings.remove(mSettingsGroupPrefix);
+	mSettings.sync();
 }

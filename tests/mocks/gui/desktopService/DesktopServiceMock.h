@@ -28,7 +28,6 @@ class DesktopServiceMock : public IDesktopService
 {
 public:
 	MOCK_METHOD(void, openFile, (const QString &path), (override));
-	MOCK_METHOD(void, openUrl, (const QString &url), (override));
 };
 
 #endif //KSNIP_DESKTOPSERVICEMOCK_H

@@ -22,65 +22,15 @@
 #include "src/backend/commandLine/CommandLineCaptureHandler.h"
 
 #include "tests/utils/TestRunner.h"
-#include "tests/mocks/backend/uploader/UploadHandlerMock.h"
 #include "tests/mocks/backend/imageGrabber/ImageGrabberMock.h"
 #include "tests/mocks/backend/saver/ImageSaverMock.h"
 #include "tests/mocks/backend/saver/SavePathProviderMock.h"
-
-void CommandLineCaptureHandlerTests::CaptureAndProcessScreenshot_Should_CallUploader_When_UploadOptionSet()
-{
-	// arrange
-	auto imageGrabberMock = QSharedPointer<ImageGrabberMock>(new ImageGrabberMock);
-	auto uploadHandlerMock = QSharedPointer<UploadHandlerMock>(new UploadHandlerMock);
-
-	CommandLineCaptureParameter parameter;
-	parameter.isWithUpload = true;
-
-	auto captureDto = CaptureDto(QPixmap());
-
-	EXPECT_CALL(*imageGrabberMock, grabImage(testing::_, testing::_, testing::_))
-		.WillRepeatedly([imageGrabberMock, captureDto](CaptureModes mode, bool cursor, int delay) {
-			imageGrabberMock->finished(captureDto);
-			testing::Mock::VerifyAndClearExpectations(imageGrabberMock.get());
-		});
-
-	EXPECT_CALL(*uploadHandlerMock, upload(captureDto.screenshot.toImage())).Times(testing::Exactly(1));
-
-	CommandLineCaptureHandler commandLineCaptureHandler(imageGrabberMock, uploadHandlerMock, nullptr, nullptr);
-
-	// act & assert
-	commandLineCaptureHandler.captureAndProcessScreenshot(parameter);
-}
-
-void CommandLineCaptureHandlerTests::CaptureAndProcessScreenshot_Should_NotCallUploader_When_UploadOptionNotSet()
-{
-	// arrange
-	auto imageGrabberMock = QSharedPointer<ImageGrabberMock>(new ImageGrabberMock);
-	auto uploadHandlerMock = QSharedPointer<UploadHandlerMock>(new UploadHandlerMock);
-
-	CommandLineCaptureParameter parameter;
-	parameter.isWithUpload = false;
-
-	EXPECT_CALL(*imageGrabberMock, grabImage(testing::_, testing::_, testing::_))
-			.WillRepeatedly([imageGrabberMock](CaptureModes mode, bool cursor, int delay) {
-				imageGrabberMock->finished(CaptureDto(QPixmap()));
-				testing::Mock::VerifyAndClearExpectations(imageGrabberMock.get());
-			});
-
-	EXPECT_CALL(*uploadHandlerMock, upload(testing::_)).Times(testing::Exactly(0));
-
-	CommandLineCaptureHandler commandLineCaptureHandler(imageGrabberMock, uploadHandlerMock, nullptr, nullptr);
-
-	// act & assert
-	commandLineCaptureHandler.captureAndProcessScreenshot(parameter);
-}
 
 void CommandLineCaptureHandlerTests::CaptureAndProcessScreenshot_Should_CallImageSaverWithDefaultSavePath_When_SaveOptionSetAndSavePathEmpty()
 {
 	// arrange
 	auto defaultSavePath = QString("/my/default/save/path");
 	auto imageGrabberMock = QSharedPointer<ImageGrabberMock>(new ImageGrabberMock);
-	auto uploadHandlerMock = QSharedPointer<UploadHandlerMock>(new UploadHandlerMock);
 	auto imageSaverMock = QSharedPointer<ImageSaverMock>(new ImageSaverMock);
 	auto savePathProviderMock = QSharedPointer<SavePathProviderMock>(new SavePathProviderMock);
 
@@ -106,7 +56,7 @@ void CommandLineCaptureHandlerTests::CaptureAndProcessScreenshot_Should_CallImag
 				return defaultSavePath;
 			});
 
-	CommandLineCaptureHandler commandLineCaptureHandler(imageGrabberMock, uploadHandlerMock, imageSaverMock, savePathProviderMock);
+	CommandLineCaptureHandler commandLineCaptureHandler(imageGrabberMock, imageSaverMock, savePathProviderMock);
 
 	// act & assert
 	commandLineCaptureHandler.captureAndProcessScreenshot(parameter);
@@ -118,7 +68,6 @@ void CommandLineCaptureHandlerTests::CaptureAndProcessScreenshot_Should_CallImag
 	auto savePath = QString("/my/default/save/path");
 	auto captureDto = CaptureDto(QPixmap());
 	auto imageGrabberMock = QSharedPointer<ImageGrabberMock>(new ImageGrabberMock);
-	auto uploadHandlerMock = QSharedPointer<UploadHandlerMock>(new UploadHandlerMock);
 	auto imageSaverMock = QSharedPointer<ImageSaverMock>(new ImageSaverMock);
 	auto savePathProviderMock = QSharedPointer<SavePathProviderMock>(new SavePathProviderMock);
 
@@ -141,7 +90,7 @@ void CommandLineCaptureHandlerTests::CaptureAndProcessScreenshot_Should_CallImag
 	EXPECT_CALL(*savePathProviderMock, savePath())
 			.Times(testing::Exactly(0));
 
-	CommandLineCaptureHandler commandLineCaptureHandler(imageGrabberMock, uploadHandlerMock, imageSaverMock, savePathProviderMock);
+	CommandLineCaptureHandler commandLineCaptureHandler(imageGrabberMock, imageSaverMock, savePathProviderMock);
 
 	// act & assert
 	commandLineCaptureHandler.captureAndProcessScreenshot(parameter);

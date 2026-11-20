@@ -25,10 +25,10 @@ AboutTab::AboutTab() :
 {
 	mContent->setText(QLatin1String("<b>") + QApplication::applicationName() + QLatin1String(" - ") + tr("Screenshot and Annotation Tool") + QLatin1String("</b><br/><br/>") +
 				   QLatin1String("(C) 2021 Damir Porobic") + QLatin1String("<br/><br/>") +
-				   tr("License: ") + QLatin1String("<a href=\"https://www.gnu.org/licenses/old-licenses/gpl-2.0.en.html\">GNU General Public License Version 2</a>"));
+				   tr("License: ") + QLatin1String("GNU General Public License Version 2"));
 	mContent->setTextFormat(Qt::RichText);
-	mContent->setTextInteractionFlags(Qt::TextBrowserInteraction);
-	mContent->setOpenExternalLinks(true);
+	mContent->setTextInteractionFlags(Qt::TextSelectableByMouse);
+	mContent->setOpenExternalLinks(false);
 	mLayout->addWidget(mContent);
 	setLayout(mLayout);
 }

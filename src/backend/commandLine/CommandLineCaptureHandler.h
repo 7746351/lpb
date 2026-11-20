@@ -27,7 +27,6 @@
 #include "src/backend/imageGrabber/IImageGrabber.h"
 #include "src/backend/saver/IImageSaver.h"
 #include "src/backend/saver/ISavePathProvider.h"
-#include "src/backend/uploader/IUploadHandler.h"
 #include "src/common/dtos/CaptureFromFileDto.h"
 #include "src/common/helper/EnumTranslator.h"
 #include "src/dependencyInjector/DependencyInjector.h"
@@ -37,7 +36,6 @@ class CommandLineCaptureHandler : public ICommandLineCaptureHandler
 public:
 	explicit CommandLineCaptureHandler(
 			const QSharedPointer<IImageGrabber> &imageGrabber,
-			const QSharedPointer<IUploadHandler> &uploadHandler,
 			const QSharedPointer<IImageSaver> &imageSaver,
 			const QSharedPointer<ISavePathProvider> &savePathProvider);
 	~CommandLineCaptureHandler() override = default;
@@ -46,18 +44,15 @@ public:
 
 private:
 	QSharedPointer<IImageGrabber> mImageGrabber;
-	QSharedPointer<IUploadHandler> mUploadHandler;
 	QSharedPointer<IImageSaver> mImageSaver;
 	QSharedPointer<ISavePathProvider> mSavePathProvider;
 	QString mSavePath;
 	bool mIsWithSave;
-	bool mIsWithUpload;
 	CaptureDto mCurrentCapture;
 
 private slots:
 	void processCapture(const CaptureDto &capture);
 	void saveCapture(const CaptureDto &capture);
-	void uploadFinished(const UploadResult &result);
 };
 
 #endif //KSNIP_COMMANDLINECAPTUREHANDLER_H

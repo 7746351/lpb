@@ -28,7 +28,9 @@ class RecentImageServiceMock :  public IRecentImageService
 {
 public:
 	MOCK_METHOD(void, storeImagePath, (const QString &imagePath), (override));
+	MOCK_METHOD(void, removeImagePath, (const QString &imagePath), (override));
 	MOCK_METHOD(QStringList, getRecentImagesPath, (), (const, override));
+	MOCK_METHOD(QStringList, getHistoryImagesPath, (), (const, override));
 };
 
 #endif //KSNIP_RECENTIMAGESERVICEMOCK_H

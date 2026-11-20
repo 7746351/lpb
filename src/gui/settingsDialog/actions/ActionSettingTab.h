@@ -56,7 +56,6 @@ private:
 	QCheckBox *mCaptureEnabledCheckBox;
 	QCheckBox *mIncludeCursorCheckBox;
 	QCheckBox *mShowPinWindowCheckBox;
-	QCheckBox *mUploadCheckBox;
 	QCheckBox *mSaveCheckBox;
 	QCheckBox *mCopyToClipboardCheckBox;
 	QCheckBox *mOpenDirectoryCheckBox;

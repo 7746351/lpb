@@ -20,15 +20,14 @@
 #ifndef KSNIP_ILOGGER_H
 #define KSNIP_ILOGGER_H
 
+#include <QSharedPointer>
 #include <QString>
-#include <QNetworkReply>
 
 class ILogger
 {
 public:
 	virtual void log(const QString &message) const = 0;
 	virtual void log(const QString &message, bool isSuccess) const = 0;
-	virtual void log(const QString &message, QNetworkReply::NetworkError value) const = 0;
 };
 
 #endif //KSNIP_ILOGGER_H

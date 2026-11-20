@@ -26,8 +26,6 @@ class CommandLineCaptureHandlerTests : public QObject
 {
     Q_OBJECT
 private slots:
-    void CaptureAndProcessScreenshot_Should_CallUploader_When_UploadOptionSet();
-    void CaptureAndProcessScreenshot_Should_NotCallUploader_When_UploadOptionNotSet();
     void CaptureAndProcessScreenshot_Should_CallImageSaverWithDefaultSavePath_When_SaveOptionSetAndSavePathEmpty();
     void CaptureAndProcessScreenshot_Should_CallImageSaverWithSavePath_When_SaveOptionSetAndSavePathNotEmpty();
 };

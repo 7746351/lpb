@@ -17,16 +17,39 @@
  * Boston, MA 02110-1301, USA.
  */
 
-#ifndef KSNIP_IIMGURUPLOADER_H
-#define KSNIP_IIMGURUPLOADER_H
+#ifndef KSNIP_SCROLLINGIMAGESTITCHER_H
+#define KSNIP_SCROLLINGIMAGESTITCHER_H
 
-#include "src/backend/uploader/IUploader.h"
+#include <QImage>
 
-class IImgurUploader : public IUploader
+class ScrollingImageStitcher
 {
 public:
-	explicit IImgurUploader() = default;
-	~IImgurUploader() override = default;
+	enum class Status
+	{
+		FirstFrame,
+		Appended,
+		Duplicate,
+		Failed
+	};
+
+	explicit ScrollingImageStitcher(int maxHeight = 10000);
+	~ScrollingImageStitcher() = default;
+
+	void reset();
+	Status addFrame(const QImage &frame);
+
+	QImage image() const;
+	int height() const;
+	bool isEmpty() const;
+
+private:
+	QImage mCanvas;
+	int mHeight;
+	int mMaxHeight;
+
+	static QImage prepareForComparison(const QImage &image);
+	static double calculateError(const QImage &image, const QImage &frame, int overlap);
 };
 
-#endif //KSNIP_IIMGURUPLOADER_H
+#endif //KSNIP_SCROLLINGIMAGESTITCHER_H

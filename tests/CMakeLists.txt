@@ -4,6 +4,7 @@ enable_testing()
 
 set(UNITTEST_SRC
 	${CMAKE_CURRENT_SOURCE_DIR}/backend/recentImages/RecentImagesPathStoreTests.cpp
+	${CMAKE_CURRENT_SOURCE_DIR}/backend/imageGrabber/ScrollingImageStitcherTests.cpp
 	${CMAKE_CURRENT_SOURCE_DIR}/backend/commandLine/CommandLineCaptureHandlerTests.cpp
 	${CMAKE_CURRENT_SOURCE_DIR}/common/helper/PathHelperTests.cpp
 	${CMAKE_CURRENT_SOURCE_DIR}/common/platform/PlatformCheckerTests.cpp
@@ -17,7 +18,6 @@ set(UNITTEST_SRC
 
 set(TESTUTILS_SRC
 	${CMAKE_CURRENT_SOURCE_DIR}/utils/TestRunner.h
-	${CMAKE_CURRENT_SOURCE_DIR}/mocks/backend/uploader/UploadHandlerMock.h
 	${CMAKE_CURRENT_SOURCE_DIR}/mocks/backend/imageGrabber/ImageGrabberMock.h
 	${CMAKE_CURRENT_SOURCE_DIR}/mocks/backend/recentImages/ImagePathStorageMock.h
 	${CMAKE_CURRENT_SOURCE_DIR}/mocks/backend/recentImages/RecentImageServiceMock.h
@@ -39,7 +39,6 @@ add_library(KSNIP_STATIC ${KSNIP_SRCS})
 target_link_libraries(KSNIP_STATIC
 	Qt${QT_MAJOR_VERSION}::Widgets
 	Qt${QT_MAJOR_VERSION}::Network
-	Qt${QT_MAJOR_VERSION}::Xml
 	Qt${QT_MAJOR_VERSION}::PrintSupport
 	kImageAnnotator::kImageAnnotator
 	kColorPicker::kColorPicker

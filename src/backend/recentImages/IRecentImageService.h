@@ -20,12 +20,16 @@
 #ifndef KSNIP_IRECENTIMAGESERVICE_H
 #define KSNIP_IRECENTIMAGESERVICE_H
 
+#include <QStringList>
+
 class IRecentImageService
 {
 public:
 	virtual ~IRecentImageService() = default;
 	virtual void storeImagePath(const QString &imagePath) = 0;
+	virtual void removeImagePath(const QString &imagePath) = 0;
 	virtual QStringList getRecentImagesPath() const = 0;
+	virtual QStringList getHistoryImagesPath() const = 0;
 };
 
 #endif //KSNIP_IRECENTIMAGESERVICE_H

@@ -36,10 +36,6 @@
 #include "TrayIconSettings.h"
 #include "SnippingAreaSettings.h"
 #include "WatermarkSettings.h"
-#include "src/gui/settingsDialog/uploader/UploaderSettings.h"
-#include "src/gui/settingsDialog/uploader/ImgurUploaderSettings.h"
-#include "src/gui/settingsDialog/uploader/ScriptUploaderSettings.h"
-#include "src/gui/settingsDialog/uploader/FtpUploaderSettings.h"
 #include "src/gui/settingsDialog/actions/ActionsSettings.h"
 #include "src/gui/settingsDialog/plugins/PluginsSettings.h"
 #include "src/backend/config/IConfig.h"
@@ -69,18 +65,14 @@ private:
 	QWidget *mEmptyWidget;
 	ApplicationSettings *mApplicationSettings;
 	ImageGrabberSettings *mImageGrabberSettings;
-	ImgurUploaderSettings *mImgurUploaderSettings;
-	ScriptUploaderSettings *mScriptUploaderSettings;
 	HotKeySettings *mHotKeySettings;
 	AnnotationSettings *mAnnotationSettings;
-	UploaderSettings *mUploaderSettings;
 	SaverSettings *mSaverSettings;
 	StickerSettings *mStickerSettings;
 	TrayIconSettings *mTrayIconSettings;
 	SnippingAreaSettings *mSnippingAreaSettings;
 	WatermarkSettings *mWatermarkSettings;
 	ActionsSettings *mActionsSettings;
-	FtpUploaderSettings *mFtpUploaderSettings;
 	PluginsSettings *mPluginsSettings;
 	QLineEdit *mSearchSettingsLineEdit;
 	QTreeWidget *mTreeWidget;

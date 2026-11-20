@@ -21,10 +21,6 @@
 
 #include "src/backend/TranslationLoader.h"
 #include "src/backend/config/Config.h"
-#include "src/backend/uploader/UploadHandler.h"
-#include "src/backend/uploader/ftp/FtpUploader.h"
-#include "src/backend/uploader/script/ScriptUploader.h"
-#include "src/backend/uploader/imgur/ImgurUploader.h"
 #include "src/backend/commandLine/CommandLineCaptureHandler.h"
 #include "src/backend/recentImages/RecentImagesPathStore.h"
 #include "src/backend/recentImages/ImagePathStorage.h"
@@ -105,11 +101,7 @@ void DependencyInjectorBootstrapper::BootstrapCommandLine(DependencyInjector *de
 	dependencyInjector->registerInstance<ISavePathProvider, SavePathProvider, IConfig>();
 	dependencyInjector->registerInstance<IImageSaver, ImageSaver, IConfig>();
 	dependencyInjector->registerInstance<ITempFileProvider, TempFileProvider, IConfig>();
-	dependencyInjector->registerInstance<IFtpUploader, FtpUploader, IConfig, ILogger>();
-	dependencyInjector->registerInstance<IScriptUploader, ScriptUploader, IConfig, ITempFileProvider>();
-	dependencyInjector->registerInstance<IImgurUploader, ImgurUploader, IConfig>();
-	dependencyInjector->registerInstance<IUploadHandler, UploadHandler, IConfig, IFtpUploader, IScriptUploader, IImgurUploader>();
-	dependencyInjector->registerInstance<ICommandLineCaptureHandler, CommandLineCaptureHandler, IImageGrabber, IUploadHandler, IImageSaver, ISavePathProvider>();
+	dependencyInjector->registerInstance<ICommandLineCaptureHandler, CommandLineCaptureHandler, IImageGrabber, IImageSaver, ISavePathProvider>();
 }
 
 void DependencyInjectorBootstrapper::BootstrapGui(DependencyInjector *dependencyInjector)

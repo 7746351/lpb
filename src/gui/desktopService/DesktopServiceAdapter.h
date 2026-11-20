@@ -31,7 +31,6 @@ public:
 	explicit DesktopServiceAdapter() = default;
 	~DesktopServiceAdapter() override = default;
 	void openFile(const QString &path) override;
-	void openUrl(const QString &url) override;
 };
 
 #endif //KSNIP_DESKTOPSERVICEADAPTER_H

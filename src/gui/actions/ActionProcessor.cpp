@@ -92,10 +92,6 @@ void ActionProcessor::postCaptureProcessing()
 		emit triggerPinImage();
 	}
 
-	if (mCurrentAction.isUploadEnabled()) {
-		emit triggerUpload();
-	}
-
 	if (mCurrentAction.isHideMainWindowEnabled()) {
 		emit triggerShow(true);
 	}

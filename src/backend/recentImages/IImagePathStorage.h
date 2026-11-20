@@ -29,6 +29,7 @@ public:
 	virtual void store(const QString &value, int index) = 0;
 	virtual QString load(int index) = 0;
 	virtual int count() = 0;
+	virtual void clear() {}
 };
 
 #endif //KSNIP_IIMAGEPATHSTORAGE_H

@@ -39,8 +39,8 @@ AuthorTab::AuthorTab()
 				   createContributorEntry(QLatin1String("Milo Ivir, milotype"), tr("Croatian Translation"), QLatin1String("mail@milotype.de"))
 	);
 	mContent->setTextFormat(Qt::RichText);
-	mContent->setTextInteractionFlags(Qt::TextBrowserInteraction);
-	mContent->setOpenExternalLinks(true);
+	mContent->setTextInteractionFlags(Qt::TextSelectableByMouse);
+	mContent->setOpenExternalLinks(false);
 
 	mLayout->addWidget(mContent);
 
@@ -64,5 +64,5 @@ QString AuthorTab::createContributorEntry(const QString &name, const QString &ro
 
 QString AuthorTab::createEmailEntry(const QString &email)
 {
-	return QLatin1String("(<a href=\"mailto:") + email + QLatin1String(R"(" target="_top">Email</a>))");
+	return QLatin1String("(") + email + QLatin1String(")");
 }

@@ -32,6 +32,7 @@ public:
 	void store(const QString &value, int index) override;
 	QString load(int index) override;
 	int count() override;
+	void clear() override;
 
 private:
 	QSettings mSettings;

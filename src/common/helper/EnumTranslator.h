@@ -24,7 +24,6 @@
 #include <QMap>
 
 #include "src/common/enum/CaptureModes.h"
-#include "src/common/enum/UploadStatus.h"
 #include "src/common/enum/PluginType.h"
 
 class EnumTranslator : public QObject
@@ -34,17 +33,14 @@ public:
 	static EnumTranslator *instance();
 
 	QString toTranslatedString(CaptureModes captureMode) const;
-	QString toString(UploadStatus uploadStatus) const;
 	QString toString(PluginType pluginType) const;
 
 private:
 	QMap<CaptureModes, QString> mCaptureModeMap;
-	QMap<UploadStatus, QString> mUploadStatusMap;
 	QMap<PluginType, QString> mPluginTypeMap;
 
 	EnumTranslator();
 	void mapCaptureModeEnum();
-	void mapUploadStatusEnum();
 	void mapPluginTypeEnum();
 };
 

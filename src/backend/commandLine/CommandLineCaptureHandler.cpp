@@ -21,26 +21,20 @@
 
 CommandLineCaptureHandler::CommandLineCaptureHandler(
 		const QSharedPointer<IImageGrabber> &imageGrabber,
-		const QSharedPointer<IUploadHandler> &uploadHandler,
 		const QSharedPointer<IImageSaver> &imageSaver,
 		const QSharedPointer<ISavePathProvider> &savePathProvider) :
 	mImageGrabber(imageGrabber),
-	mUploadHandler(uploadHandler),
 	mImageSaver(imageSaver),
 	mSavePathProvider(savePathProvider),
-	mIsWithSave(false),
-	mIsWithUpload(false)
+	mIsWithSave(false)
 {
 	connect(mImageGrabber.data(), &IImageGrabber::finished, this, &CommandLineCaptureHandler::processCapture);
 	connect(mImageGrabber.data(), &IImageGrabber::canceled, this, &CommandLineCaptureHandler::canceled);
-
-	connect(mUploadHandler.data(), &IUploader::finished, this, &CommandLineCaptureHandler::uploadFinished);
 }
 
 void CommandLineCaptureHandler::captureAndProcessScreenshot(const CommandLineCaptureParameter &parameter)
 {
 	mIsWithSave = parameter.isWithSave;
-	mIsWithUpload = parameter.isWithUpload;
 	mSavePath = parameter.savePath;
 	mImageGrabber->grabImage(parameter.captureMode, parameter.isWithCursor, parameter.delay);
 }
@@ -53,11 +47,7 @@ void CommandLineCaptureHandler::processCapture(const CaptureDto &capture)
 		saveCapture(mCurrentCapture);
 	}
 
-	if (mIsWithUpload) {
-		mUploadHandler->upload(capture.screenshot.toImage());
-	} else {
-		finished(mCurrentCapture);
-	}
+	finished(mCurrentCapture);
 }
 
 void CommandLineCaptureHandler::saveCapture(const CaptureDto &capture)
@@ -75,20 +65,4 @@ void CommandLineCaptureHandler::saveCapture(const CaptureDto &capture)
 QList<CaptureModes> CommandLineCaptureHandler::supportedCaptureModes() const
 {
 	return mImageGrabber->supportedCaptureModes();
-}
-
-void CommandLineCaptureHandler::uploadFinished(const UploadResult &result)
-{
-	if (result.isError()) {
-		auto enumTranslator = EnumTranslator::instance();
-		qWarning("Upload failed: %s", qPrintable(enumTranslator->toString(result.status)));
-	} else {
-		qInfo("Upload finished");
-	}
-
-	if (result.hasContent()) {
-		qInfo("Upload result: %s", qPrintable(result.content));
-	}
-
-	finished(mCurrentCapture);
 }

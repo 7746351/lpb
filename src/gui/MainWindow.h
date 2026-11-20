@@ -35,8 +35,6 @@
 #include "src/gui/notificationService/NotificationServiceFactory.h"
 #include "src/gui/operations/AddWatermarkOperation.h"
 #include "src/gui/operations/CopyAsDataUriOperation.h"
-#include "src/gui/operations/UploadOperation.h"
-#include "src/gui/operations/HandleUploadResultOperation.h"
 #include "src/gui/operations/LoadImageFromFileOperation.h"
 #include "src/gui/globalHotKeys/GlobalHotKeyHandler.h"
 #include "src/gui/captureHandler/CaptureHandlerFactory.h"
@@ -45,12 +43,12 @@
 #include "src/gui/modelessWindows/pinWindow/IPinWindowHandler.h"
 #include "src/gui/modelessWindows/ocrWindow/IOcrWindowHandler.h"
 #include "src/gui/RecentImagesMenu.h"
+#include "src/gui/CaptureHistoryDialog.h"
 #include "src/gui/dragAndDrop/DragAndDropProcessor.h"
 #include "src/gui/dragAndDrop/IDragContentProvider.h"
 #include "src/gui/windowResizer/IResizableWindow.h"
 #include "src/gui/windowResizer/WindowResizer.h"
 #include "src/widgets/MainToolBar.h"
-#include "src/backend/uploader/UploadHandler.h"
 #include "src/backend/CapturePrinter.h"
 #include "src/backend/imageGrabber/IImageGrabber.h"
 #include "src/common/provider/ApplicationTitleProvider.h"
@@ -102,7 +100,6 @@ private:
 	bool mResizeOnNormalize;
 	QAction *mSaveAsAction;
 	QAction *mSaveAllAction;
-	QAction *mUploadAction;
 	QAction *mCopyAsDataUriAction;
 	QAction *mPrintAction;
 	QAction *mPrintPreviewAction;
@@ -114,6 +111,7 @@ private:
 	QAction *mSettingsAction;
 	QAction *mAboutAction;
 	QAction *mOpenImageAction;
+	QAction *mHistoryAction;
 	QAction *mScaleAction;
 	QAction *mRotateAction;
 	QAction *mAddWatermarkAction;
@@ -135,7 +133,6 @@ private:
 	QSharedPointer<ISavePathProvider> mSavePathProvider;
 	GlobalHotKeyHandler *mGlobalHotKeyHandler;
 	DragAndDropProcessor *mDragAndDropProcessor;
-	QSharedPointer<IUploadHandler> mUploadHandler;
 	ICaptureHandler *mCaptureHandler;
 	QSharedPointer<IPinWindowHandler> mPinWindowHandler;
 	WidgetVisibilityHandler *mVisibilityHandler;
@@ -156,12 +153,11 @@ private slots:
 	void captureChanged() override;
 	void captureEmpty() override;
     void copyCaptureToClipboard();
-    void upload();
-    void uploadFinished(const UploadResult &result);
     void copyAsDataUri();
     void printClicked();
     void printPreviewClicked();
     void showOpenImageDialog();
+    void showHistoryDialog();
     void pasteFromClipboard();
     void pasteEmbeddedFromClipboard();
     void setupImageAnnotator();

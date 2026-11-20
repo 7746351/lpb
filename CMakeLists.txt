@@ -41,7 +41,7 @@ if (UNIX AND NOT APPLE)
 	find_package(XCB COMPONENTS XFIXES)
 endif ()
 
-set(QT_COMPONENTS Core Widgets Network Xml PrintSupport DBus Svg)
+set(QT_COMPONENTS Core Widgets Network PrintSupport DBus Svg)
 set(QT_MIN_VERSION 5.15.2)
 
 option(BUILD_WITH_QT6 "Build against Qt6" OFF)

@@ -30,7 +30,6 @@ struct CommandLineCaptureParameter
 	int delay = 0;
 	bool isWithCursor = false;
 	bool isWithSave = false;
-	bool isWithUpload = false;
 	QString savePath = QString();
 
 	explicit CommandLineCaptureParameter() = default;
@@ -42,7 +41,6 @@ struct CommandLineCaptureParameter
 		this->isWithCursor = isWithCursor;
 		this->isWithSave = false;
 		this->savePath = QString();
-		this->isWithUpload = false;
 	}
 };
 

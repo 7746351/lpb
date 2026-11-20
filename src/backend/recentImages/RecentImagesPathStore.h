@@ -20,7 +20,7 @@
 #ifndef KSNIP_RECENTIMAGESPATHSTORE_H
 #define KSNIP_RECENTIMAGESPATHSTORE_H
 
-#include <QQueue>
+#include <QList>
 #include <QSharedPointer>
 
 #include <algorithm>
@@ -35,15 +35,18 @@ public:
 	~RecentImagesPathStore() override = default;
 
 	void storeImagePath(const QString &imagePath) override;
+	void removeImagePath(const QString &imagePath) override;
 	QStringList getRecentImagesPath() const override;
+	QStringList getHistoryImagesPath() const override;
 
 private:
 	const QSharedPointer<IImagePathStorage> mImagePathStorage;
-	QQueue<QString> mRecentImagesPathCache;
+	QList<QString> mImagesPathCache;
 	const int mMaxRecentItems;
+	const int mMaxHistoryItems;
 
-	void loadRecentImagesPath();
-	void saveRecentImagesPath();
+	void loadImagesPath();
+	void saveImagesPath();
 };
 
 #endif //KSNIP_RECENTIMAGESPATHSTORE_H

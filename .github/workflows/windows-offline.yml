@@ -1,0 +1,70 @@
+name: windows-offline
+
+on:
+  workflow_dispatch:
+  push:
+    branches:
+      - master
+      - main
+    tags:
+      - "v*"
+
+permissions:
+  contents: read
+
+jobs:
+  build-windows:
+    runs-on: windows-2022
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+        with:
+          submodules: recursive
+
+      - name: Install Qt
+        uses: jurplel/install-qt-action@v4
+        with:
+          version: '5.15.2'
+          host: 'windows'
+          arch: 'win64_msvc2019_64'
+          cache: true
+
+      - name: Set up MSVC
+        uses: ilammy/msvc-dev-cmd@v1
+
+      - name: Configure
+        run: >
+          cmake -S . -B build -G "NMake Makefiles"
+          -DCMAKE_BUILD_TYPE=Release
+          -DBUILD_TESTS=ON
+          -DUSE_SUBMODULE_KCOLORPICKER=ON
+          -DUSE_SUBMODULE_KIMAGEANNOTATOR=ON
+
+      - name: Build
+        run: cmake --build build --parallel
+
+      - name: Test
+        run: ctest --test-dir build/tests --output-on-failure
+        continue-on-error: true
+
+      - name: Package portable executable
+        shell: pwsh
+        run: |
+          New-Item -ItemType Directory -Force -Path dist | Out-Null
+          Copy-Item build\src\ksnip.exe dist\ksnip.exe
+          windeployqt.exe --no-opengl-sw --no-system-d3d-compiler --compiler-runtime --release dist\ksnip.exe
+          New-Item -ItemType Directory -Force -Path dist\translations | Out-Null
+          if (Test-Path build\translations\*.qm) {
+            Copy-Item build\translations\*.qm dist\translations\
+          }
+          if (Test-Path build\kImageAnnotator\translations\*.qm) {
+            Copy-Item build\kImageAnnotator\translations\*.qm dist\translations\
+          }
+          7z a ksnip-offline-windows.zip .\dist\*
+
+      - name: Upload portable build
+        uses: actions/upload-artifact@v4
+        with:
+          name: ksnip-offline-windows
+          path: ksnip-offline-windows.zip
+          if-no-files-found: error

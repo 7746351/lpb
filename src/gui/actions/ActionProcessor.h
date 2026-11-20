@@ -39,7 +39,6 @@ signals:
 	void triggerPinImage() const;
 	void triggerCopyToClipboard() const;
 	void triggerSave() const;
-	void triggerUpload() const;
 	void triggerOpenDirectory() const;
 	void triggerShow(bool minimized) const;
 

@@ -324,81 +324,6 @@ QString ConfigOptions::scaleWaylandScreenshotsEnabledString()
 	return imageGrabberSectionString() + QLatin1String("ScaleGenericWaylandScreenshotsEnabledString");
 }
 
-QString ConfigOptions::imgurUsernameString()
-{
-	return imgurSectionString() + QLatin1String("Username");
-}
-
-QString ConfigOptions::imgurClientIdString()
-{
-	return imgurSectionString() + QLatin1String("ClientId");
-}
-
-QString ConfigOptions::imgurClientSecretString()
-{
-	return imgurSectionString() + QLatin1String("ClientSecret");
-}
-
-QString ConfigOptions::imgurAccessTokenString()
-{
-	return imgurSectionString() + QLatin1String("AccessToken");
-}
-
-QString ConfigOptions::imgurRefreshTokenString()
-{
-	return imgurSectionString() + QLatin1String("RefreshToken");
-}
-
-QString ConfigOptions::imgurForceAnonymousString()
-{
-	return imgurSectionString() + QLatin1String("ForceAnonymous");
-}
-
-QString ConfigOptions::imgurLinkDirectlyToImageString()
-{
-	return imgurSectionString() + QLatin1String("OpenLinkDirectlyToImage");
-}
-
-QString ConfigOptions::imgurOpenLinkInBrowserString()
-{
-	return imgurSectionString() + QLatin1String("OpenLinkInBrowser");
-}
-
-QString ConfigOptions::imgurUploadTitleString()
-{
-	return imgurSectionString() + QLatin1String("UploadTitle");
-}
-
-QString ConfigOptions::imgurUploadDescriptionString()
-{
-	return imgurSectionString() + QLatin1String("UploadDescription");
-}
-
-QString ConfigOptions::imgurAlwaysCopyToClipboardString()
-{
-	return imgurSectionString() + QLatin1String("AlwaysCopyToClipboard");
-}
-
-QString ConfigOptions::imgurBaseUrlString()
-{
-	return imgurSectionString() + QLatin1String("BaseUrl");
-}
-
-QString ConfigOptions::uploadScriptPathString()
-{
-	return uploadScriptSectionString() + QLatin1String("UploadScriptPath");
-}
-
-QString ConfigOptions::confirmBeforeUploadString()
-{
-	return uploaderSectionString() + QLatin1String("ConfirmBeforeUpload");
-}
-
-QString ConfigOptions::uploaderTypeString()
-{
-	return uploaderSectionString() + QLatin1String("UploaderType");
-}
-
 QString ConfigOptions::canvasColorString()
 {
 	return annotatorSectionString() + QLatin1String("CanvasColor");
@@ -449,11 +374,6 @@ QString ConfigOptions::actionIsPinImageEnabledString()
 	return QLatin1String("IsPinImageEnabled");
 }
 
-QString ConfigOptions::actionIsUploadEnabledString()
-{
-	return QLatin1String("IsUploadEnabled");
-}
-
 QString ConfigOptions::actionIsOpenDirectoryEnabledString()
 {
 	return QLatin1String("IsOpenDirectoryEnabled");
@@ -502,41 +422,6 @@ QString ConfigOptions::pluginInfoTypeString()
 QString ConfigOptions::pluginInfoVersionString()
 {
 	return pluginsSectionString() + QLatin1String("PluginInfoVersion");
-}
-
-QString ConfigOptions::uploadScriptCopyOutputToClipboardString()
-{
-	return uploadScriptSectionString() + QLatin1String("CopyOutputToClipboard");
-}
-
-QString ConfigOptions::uploadScriptStopOnStdErrString()
-{
-	return uploadScriptSectionString() + QLatin1String("UploadScriptStoOnStdErr");
-}
-
-QString ConfigOptions::uploadScriptCopyOutputFilterString()
-{
-	return uploadScriptSectionString() + QLatin1String("CopyOutputFilter");
-}
-
-QString ConfigOptions::ftpUploadForceAnonymousString()
-{
-	return ftpUploadSectionString() + QLatin1String("ForceAnonymous");
-}
-
-QString ConfigOptions::ftpUploadUrlString()
-{
-	return ftpUploadSectionString() + QLatin1String("Url");
-}
-
-QString ConfigOptions::ftpUploadUsernameString()
-{
-	return ftpUploadSectionString() + QLatin1String("Username");
-}
-
-QString ConfigOptions::ftpUploadPasswordString()
-{
-	return ftpUploadSectionString() + QLatin1String("Password");
 }
 
 QString ConfigOptions::globalHotKeysEnabledString()
@@ -592,26 +477,6 @@ QString ConfigOptions::imageGrabberSectionString()
 QString ConfigOptions::annotatorSectionString()
 {
 	return QLatin1String("Painter/");
-}
-
-QString ConfigOptions::uploaderSectionString()
-{
-	return QLatin1String("Uploader/");
-}
-
-QString ConfigOptions::imgurSectionString()
-{
-	return QLatin1String("Imgur/");
-}
-
-QString ConfigOptions::uploadScriptSectionString()
-{
-	return QLatin1String("UploadScript/");
-}
-
-QString ConfigOptions::ftpUploadSectionString()
-{
-	return QLatin1String("FtpUpload/");
 }
 
 QString ConfigOptions::hotKeysSectionString()
