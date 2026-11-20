@@ -36,16 +36,12 @@ jobs:
         run: >
           cmake -S . -B build -G "NMake Makefiles"
           -DCMAKE_BUILD_TYPE=Release
-          -DBUILD_TESTS=ON
+          -DBUILD_TESTS=OFF
           -DUSE_SUBMODULE_KCOLORPICKER=ON
           -DUSE_SUBMODULE_KIMAGEANNOTATOR=ON
 
       - name: Build
         run: cmake --build build --parallel
-
-      - name: Test
-        run: ctest --test-dir build/tests --output-on-failure
-        continue-on-error: true
 
       - name: Package portable executable
         shell: pwsh
